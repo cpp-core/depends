@@ -1,27 +1,32 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 
+message("-- cxx-depends: reading cmake file")
+
+if(POLICY CMP0077)
+    cmake_policy(SET CMP0077 NEW)
+endif()
+
 # Configuration variables
 #
-option(INSTALL_DATELIB "Build and install datelib" ON)
-option(INSTALL_FMTLIB "Build and install fmtlib" ON)
-option(INSTALL_INJA "Build and install inja templating library" ON)
-option(INSTALL_GOOGLETEST "Build and install googletest" ON)
-option(INSTALL_JSON "Build and install nlohmann json library" ON)
-option(INSTALL_XML "Build and install pugixml library" ON)
-option(INSTALL_XTENSOR "Build and install xtensor libary" ON)
-option(INSTALL_ZSTD "Build and install zstd compress library" ON)
+option(DEPENDS_INSTALL_DATELIB "Build and install datelib" OFF)
+option(DEPENDS_INSTALL_FMTLIB "Build and install fmtlib" OFF)
+option(DEPENDS_INSTALL_INJA "Build and install inja templating library" OFF)
+option(DEPENDS_INSTALL_GOOGLETEST "Build and install googletest" OFF)
+option(DEPENDS_INSTALL_JSON "Build and install nlohmann json library" OFF)
+option(DEPENDS_INSTALL_XML "Build and install pugixml library" OFF)
+option(DEPENDS_INSTALL_XTENSOR "Build and install xtensor libary" OFF)
+option(DEPENDS_INSTALL_ZSTD "Build and install zstd compress library" OFF)
 
 # Directories
 #
 set(DEPENDS_PARENT_DIR ${PROJECT_SOURCE_DIR} CACHE INTERNAL "")
-set(DEPENDS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/depends CACHE INTERNAL "")
+set(DEPENDS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/cmake CACHE INTERNAL "")
 set(DEPENDS_BUILD_DIR ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-build CACHE INTERNAL "")
 set(DEPENDS_INSTALL_DIR ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-install CACHE INTERNAL "")
 
-include(${DEPENDS_SOURCE_DIR}/datelib.cmake)
-include(${DEPENDS_SOURCE_DIR}/fmtlib.cmake)
-include(${DEPENDS_SOURCE_DIR}/zstd.cmake)
+file(MAKE_DIRECTORY ${DEPENDS_INSTALL_DIR}/include)
+file(MAKE_DIRECTORY ${DEPENDS_INSTALL_DIR}/lib)
 
 list(APPEND CMAKE_PREFIX_PATH ${DEPENDS_INSTALL_DIR})
 
@@ -31,7 +36,7 @@ set(CXX ${CMAKE_CXX_COMPILER})
 include(ExternalProject)
 add_custom_target(cxx_depends)
 
-if(INSTALL_DATELIB)
+if(DEPENDS_INSTALL_DATELIB)
   ExternalProject_Add(cxx_datelib
     PREFIX ${DEPENDS_BUILD_DIR}/datelib
     GIT_REPOSITORY git@github.com:melton1968/date
@@ -44,7 +49,7 @@ if(INSTALL_DATELIB)
   add_dependencies(cxx_depends cxx_datelib)
 endif()
 
-if(INSTALL_FMTLIB)
+if(DEPENDS_INSTALL_FMTLIB)
   ExternalProject_Add(cxx_fmtlib
     PREFIX ${DEPENDS_BUILD_DIR}/fmtlib
     GIT_REPOSITORY git@github.com:melton1968/fmt.git
@@ -57,7 +62,7 @@ if(INSTALL_FMTLIB)
   add_dependencies(cxx_depends cxx_fmtlib)
 endif()
 
-if(INSTALL_GOOGLETEST)
+if(DEPENDS_INSTALL_GOOGLETEST)
   ExternalProject_Add(cxx_googletest
     PREFIX ${DEPENDS_BUILD_DIR}/googletest
     GIT_REPOSITORY git@github.com:melton1968/googletest.git
@@ -70,7 +75,7 @@ if(INSTALL_GOOGLETEST)
   add_dependencies(cxx_depends cxx_googletest)
 endif()
 
-if(INSTALL_JSON OR DEPENDS_INSTALL_INJA)
+if(DEPENDS_INSTALL_JSON OR DEPENDS_INSTALL_INJA)
   ExternalProject_Add(cxx_nlohmann_json
     PREFIX ${DEPENDS_BUILD_DIR}/nlohmann_json
     GIT_REPOSITORY git@github.com:melton1968/json.git
@@ -83,7 +88,7 @@ if(INSTALL_JSON OR DEPENDS_INSTALL_INJA)
   add_dependencies(cxx_depends cxx_nlohmann_json)
 endif()
 
-if(INSTALL_INJA)
+if(DEPENDS_INSTALL_INJA)
   ExternalProject_Add(cxx_inja
     PREFIX ${DEPENDS_BUILD_DIR}/inja
     GIT_REPOSITORY git@github.com:melton1968/inja.git
@@ -97,7 +102,7 @@ if(INSTALL_INJA)
   add_dependencies(cxx_depends cxx_inja)
 endif()
 
-if(INSTALL_XML)
+if(DEPENDS_INSTALL_XML)
   ExternalProject_Add(cxx_pugixml
     PREFIX ${DEPENDS_BUILD_DIR}/pugixml
     GIT_REPOSITORY git@github.com:melton1968/pugixml.git
@@ -110,7 +115,7 @@ if(INSTALL_XML)
   add_dependencies(cxx_depends cxx_pugixml)
 endif()
 
-if(INSTALL_XTENSOR)
+if(DEPENDS_INSTALL_XTENSOR)
   ExternalProject_Add(cxx_xsimd
     PREFIX ${DEPENDS_BUILD_DIR}/xsimd
     GIT_REPOSITORY git@github.com:melton1968/xsimd.git
@@ -145,7 +150,7 @@ if(INSTALL_XTENSOR)
   add_dependencies(cxx_depends cxx_xtensor)
 endif()
 
-if(INSTALL_ZSTD)
+if(DEPENDS_INSTALL_ZSTD)
   ExternalProject_Add(cxx_zstd
     PREFIX ${DEPENDS_BUILD_DIR}/zstd
     GIT_REPOSITORY git@github.com:melton1968/zstd.git
@@ -157,4 +162,3 @@ if(INSTALL_ZSTD)
     )
   add_dependencies(cxx_depends cxx_zstd)
 endif()
-
