@@ -1,0 +1,58 @@
+diff --git a/configure.ac b/configure.ac
+index 61b0c6f1..17989f81 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -271,7 +271,7 @@ AC_MSG_CHECKING([[for target host OS]])
+ AS_CASE(["$host_os"],
+  [*darwin* | *rhapsody* | *macosx*],
+  [AC_DEFINE_UNQUOTED(OSX,1,[This is an OS X system])
+-     CFLAGS="-no-cpp-precomp -fno-common $CFLAGS"
++     CFLAGS="-fno-common $CFLAGS"
+      mhd_host_os='Darwin'
+      AC_MSG_RESULT([[$mhd_host_os]])],
+  [freebsd*],
+diff --git a/src/microhttpd/mhd_sockets.c b/src/microhttpd/mhd_sockets.c
+index 04405945..e0bf0f73 100644
+--- a/src/microhttpd/mhd_sockets.c
++++ b/src/microhttpd/mhd_sockets.c
+@@ -540,23 +540,23 @@ MHD_socket_create_listen_ (int pf)
+   if (MHD_INVALID_SOCKET == fd)
+     return MHD_INVALID_SOCKET;
+ 
+-#if defined(SOCK_NOSIGPIPE) || defined(MHD_socket_nosignal_)
+-  if ( ( (! nosigpipe_set)
+-#ifdef MHD_socket_nosignal_
+-         || (! MHD_socket_nosignal_(fd))
+-#endif /* MHD_socket_nosignal_ */
+-       ) && (0 == MAYBE_MSG_NOSIGNAL) )
+-    {
+-      /* SIGPIPE disable is possible on this platform
+-       * (so application expect that it will be disabled),
+-       * but failed to be disabled here and it is not
+-       * possible to disable SIGPIPE by MSG_NOSIGNAL. */
+-      const int err = MHD_socket_get_error_ ();
+-      (void) MHD_socket_close_ (fd);
+-      MHD_socket_fset_error_ (err);
+-      return MHD_INVALID_SOCKET;
+-    }
+-#endif /* SOCK_NOSIGPIPE ||  MHD_socket_nosignal_ */
++/* #if defined(SOCK_NOSIGPIPE) || defined(MHD_socket_nosignal_) */
++/*   if ( ( (! nosigpipe_set) */
++/* #ifdef MHD_socket_nosignal_ */
++/*          || (! MHD_socket_nosignal_(fd)) */
++/* #endif /\* MHD_socket_nosignal_ *\/ */
++/*        ) && (0 == MAYBE_MSG_NOSIGNAL) ) */
++/*     { */
++/*       /\* SIGPIPE disable is possible on this platform */
++/*        * (so application expect that it will be disabled), */
++/*        * but failed to be disabled here and it is not */
++/*        * possible to disable SIGPIPE by MSG_NOSIGNAL. *\/ */
++/*       const int err = MHD_socket_get_error_ (); */
++/*       (void) MHD_socket_close_ (fd); */
++/*       MHD_socket_fset_error_ (err); */
++/*       return MHD_INVALID_SOCKET; */
++/*     } */
++/* #endif /\* SOCK_NOSIGPIPE ||  MHD_socket_nosignal_ *\/ */
+   if (! cloexec_set)
+     (void) MHD_socket_noninheritable_ (fd);
+ 

@@ -1,68 +1,65 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 
-message("-- cxx-depends: reading cmake file")
-
-if(POLICY CMP0077)
-    cmake_policy(SET CMP0077 NEW)
+if(NOT TARGET cxx_depends)
+  # Directories
+  #
+  set(DEPENDS_PARENT_DIR ${PROJECT_SOURCE_DIR} CACHE INTERNAL "")
+  set(DEPENDS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/cmake CACHE INTERNAL "")
+  set(DEPENDS_BUILD_DIR ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-build CACHE INTERNAL "")
+  set(DEPENDS_INSTALL_DIR ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-install CACHE INTERNAL "")
+  
+  file(MAKE_DIRECTORY ${DEPENDS_INSTALL_DIR}/include)
+  file(MAKE_DIRECTORY ${DEPENDS_INSTALL_DIR}/lib)
+  
+  list(APPEND CMAKE_PREFIX_PATH ${DEPENDS_INSTALL_DIR})
+  
+  add_custom_target(cxx_depends)
 endif()
 
-# Configuration variables
+# The collection of external packages
 #
-option(DEPENDS_INSTALL_DATELIB "Build and install datelib" OFF)
-option(DEPENDS_INSTALL_FMTLIB "Build and install fmtlib" OFF)
-option(DEPENDS_INSTALL_INJA "Build and install inja templating library" OFF)
-option(DEPENDS_INSTALL_GOOGLETEST "Build and install googletest" OFF)
-option(DEPENDS_INSTALL_JSON "Build and install nlohmann json library" OFF)
-option(DEPENDS_INSTALL_XML "Build and install pugixml library" OFF)
-option(DEPENDS_INSTALL_XTENSOR "Build and install xtensor libary" OFF)
-option(DEPENDS_INSTALL_ZSTD "Build and install zstd compress library" OFF)
-
-# Directories
-#
-set(DEPENDS_PARENT_DIR ${PROJECT_SOURCE_DIR} CACHE INTERNAL "")
-set(DEPENDS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/cmake CACHE INTERNAL "")
-set(DEPENDS_BUILD_DIR ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-build CACHE INTERNAL "")
-set(DEPENDS_INSTALL_DIR ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-install CACHE INTERNAL "")
-
-file(MAKE_DIRECTORY ${DEPENDS_INSTALL_DIR}/include)
-file(MAKE_DIRECTORY ${DEPENDS_INSTALL_DIR}/lib)
-
-list(APPEND CMAKE_PREFIX_PATH ${DEPENDS_INSTALL_DIR})
-
 set(CC ${CMAKE_C_COMPILER})
 set(CXX ${CMAKE_CXX_COMPILER})
-
 include(ExternalProject)
-add_custom_target(cxx_depends)
 
-if(DEPENDS_INSTALL_DATELIB)
-  ExternalProject_Add(cxx_datelib
-    PREFIX ${DEPENDS_BUILD_DIR}/datelib
+if(NOT TARGET cxx_cpr)
+  ExternalProject_Add(cxx_cpr
+    PREFIX cpr
+    GIT_REPOSITORY git@github.com:melton1968/cpr
+    GIT_TAG 744bdddf7eaa1007e7ebac42667d286fb141be1d
+    GIT_SHALLOW TRUE
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
+    -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DUSE_SYSTEM_CURL=ON ../cxx_cpr
+    BUILD_COMMAND make -j
+    )
+endif()
+
+if(NOT TARGET cxx_date)
+  ExternalProject_Add(cxx_date
+    PREFIX ${DEPENDS_BUILD_DIR}/date
     GIT_REPOSITORY git@github.com:melton1968/date
     GIT_TAG 92dbf3a58f9a7bc77c081f1c5a9d64cce69c5bb9
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_datelib
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_date
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_depends cxx_datelib)
 endif()
 
-if(DEPENDS_INSTALL_FMTLIB)
-  ExternalProject_Add(cxx_fmtlib
-    PREFIX ${DEPENDS_BUILD_DIR}/fmtlib
+if(NOT TARGET cxx_fmt)
+  ExternalProject_Add(cxx_fmt
+    PREFIX ${DEPENDS_BUILD_DIR}/fmt
     GIT_REPOSITORY git@github.com:melton1968/fmt.git
     GIT_TAG 7512a55aa3ae309587ca89668ef9ec4074a51a1f
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DFMT_DOC=OFF -DFMT_TEST=OFF -DFMT_FUZZ=OFF ../cxx_fmtlib
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DFMT_DOC=OFF -DFMT_TEST=OFF -DFMT_FUZZ=OFF ../cxx_fmt
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_depends cxx_fmtlib)
 endif()
 
-if(DEPENDS_INSTALL_GOOGLETEST)
+if(NOT TARGET cxx_googletest)
   ExternalProject_Add(cxx_googletest
     PREFIX ${DEPENDS_BUILD_DIR}/googletest
     GIT_REPOSITORY git@github.com:melton1968/googletest.git
@@ -72,23 +69,21 @@ if(DEPENDS_INSTALL_GOOGLETEST)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_googletest
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_depends cxx_googletest)
 endif()
 
-if(DEPENDS_INSTALL_JSON OR DEPENDS_INSTALL_INJA)
-  ExternalProject_Add(cxx_nlohmann_json
+if(NOT TARGET cxx_json)
+  ExternalProject_Add(cxx_json
     PREFIX ${DEPENDS_BUILD_DIR}/nlohmann_json
     GIT_REPOSITORY git@github.com:melton1968/json.git
     GIT_TAG tags/v3.7.0
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DJSON_BuildTests=OFF -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_nlohmann_json
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DJSON_BuildTests=OFF -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_json
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_depends cxx_nlohmann_json)
 endif()
 
-if(DEPENDS_INSTALL_INJA)
+if(NOT TARGET cxx_inja)
   ExternalProject_Add(cxx_inja
     PREFIX ${DEPENDS_BUILD_DIR}/inja
     GIT_REPOSITORY git@github.com:melton1968/inja.git
@@ -98,24 +93,56 @@ if(DEPENDS_INSTALL_INJA)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DINJA_USE_EMBEDDED_JSON=OFF -DBUILD_TESTING=OFF -DBUILD_BENCHMARK=OFF ../cxx_inja
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_inja cxx_nlohmann_json)
-  add_dependencies(cxx_depends cxx_inja)
+  add_dependencies(cxx_inja cxx_json)
 endif()
 
-if(DEPENDS_INSTALL_XML)
-  ExternalProject_Add(cxx_pugixml
+if(NOT TARGET cxx_httpserver)
+  ExternalProject_Add(cxx_libmicrohttpd
+    PREFIX libmicrohttpd
+    GIT_REPOSITORY git@github.com:melton1968/libmicrohttpd
+    GIT_TAG master
+    GIT_SHALLOW TRUE
+    PATCH_COMMAND git apply ${DEPENDS_PARENT_DIR}/patches/libmicrohttpd.patch
+    BUILD_IN_SOURCE TRUE
+    CONFIGURE_COMMAND autoreconf -fi && ./configure CC=${CC} CXX=${CXX} --disable-https --prefix=${DEPENDS_INSTALL_DIR}
+    BUILD_COMMAND make -j8
+    INSTALL_COMMAND make install
+    )
+  
+  ExternalProject_Add(cxx_httpserver
+    PREFIX libhttpserver
+    GIT_REPOSITORY git@github.com:melton1968/libhttpserver
+    GIT_TAG master
+    GIT_SHALLOW TRUE
+    CONFIGURE_COMMAND LDFLAGS=-L${DEPENDS_INSTALL_DIR}/lib CXXFLAGS=-I${DEPENDS_INSTALL_DIR}/include
+    <SOURCE_DIR>/configure CC=${CC} CXX=${CXX} --prefix=${DEPENDS_INSTALL_DIR}
+    BUILD_COMMAND make -j
+    INSTALL_COMMAND make install
+    )
+  
+  ExternalProject_Add_Step(cxx_httpserver boostrap
+    COMMAND ./bootstrap
+    DEPENDEES patch
+    DEPENDERS configure
+    WORKING_DIRECTORY <SOURCE_DIR>
+    )
+  
+  add_dependencies(cxx_httpserver cxx_libmicrohttpd)
+endif()
+
+if(NOT TARGET cxx_xml)
+  ExternalProject_Add(cxx_xml
     PREFIX ${DEPENDS_BUILD_DIR}/pugixml
     GIT_REPOSITORY git@github.com:melton1968/pugixml.git
     GIT_TAG tags/v1.10
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_pugixml
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_xml
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_depends cxx_pugixml)
 endif()
 
-if(DEPENDS_INSTALL_XTENSOR)
+if(NOT TARGET cxx_xtensor)
   ExternalProject_Add(cxx_xsimd
     PREFIX ${DEPENDS_BUILD_DIR}/xsimd
     GIT_REPOSITORY git@github.com:melton1968/xsimd.git
@@ -147,10 +174,9 @@ if(DEPENDS_INSTALL_XTENSOR)
     )
   
   add_dependencies(cxx_xtensor cxx_xtl cxx_xsimd)
-  add_dependencies(cxx_depends cxx_xtensor)
 endif()
 
-if(DEPENDS_INSTALL_ZSTD)
+if(NOT TARGET cxx_zstd)
   ExternalProject_Add(cxx_zstd
     PREFIX ${DEPENDS_BUILD_DIR}/zstd
     GIT_REPOSITORY git@github.com:melton1968/zstd.git
@@ -160,5 +186,4 @@ if(DEPENDS_INSTALL_ZSTD)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_zstd/build/cmake
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_depends cxx_zstd)
 endif()
