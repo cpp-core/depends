@@ -29,6 +29,7 @@ if(NOT TARGET cxx_cpr)
     GIT_REPOSITORY git@github.com:melton1968/cpr
     GIT_TAG 744bdddf7eaa1007e7ebac42667d286fb141be1d
     GIT_SHALLOW TRUE
+    EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
     -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DUSE_SYSTEM_CURL=ON ../cxx_cpr
     BUILD_COMMAND make -j
@@ -104,6 +105,7 @@ if(NOT TARGET cxx_httpserver)
     GIT_SHALLOW TRUE
     PATCH_COMMAND git apply ${DEPENDS_PARENT_DIR}/patches/libmicrohttpd.patch
     BUILD_IN_SOURCE TRUE
+    EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND autoreconf -fi && ./configure CC=${CC} CXX=${CXX} --disable-https --prefix=${DEPENDS_INSTALL_DIR}
     BUILD_COMMAND make -j8
     INSTALL_COMMAND make install
@@ -114,6 +116,7 @@ if(NOT TARGET cxx_httpserver)
     GIT_REPOSITORY git@github.com:melton1968/libhttpserver
     GIT_TAG master
     GIT_SHALLOW TRUE
+    EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND LDFLAGS=-L${DEPENDS_INSTALL_DIR}/lib CXXFLAGS=-I${DEPENDS_INSTALL_DIR}/include
     <SOURCE_DIR>/configure CC=${CC} CXX=${CXX} --prefix=${DEPENDS_INSTALL_DIR}
     BUILD_COMMAND make -j
