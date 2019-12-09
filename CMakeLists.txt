@@ -17,6 +17,7 @@ if(NOT TARGET cxx_depends)
   list(APPEND CMAKE_PREFIX_PATH ${DEPENDS_INSTALL_DIR})
   
   add_custom_target(cxx_depends)
+  add_custom_target(cxx_depends_all)
 endif()
 
 # The collection of external packages
@@ -56,6 +57,7 @@ if(NOT TARGET cxx_bigtable)
   add_custom_target(cxx_bigtable)
   add_dependencies(google_cloud_cpp google_cloud_cpp_depend)
   add_dependencies(cxx_bigtable google_cloud_cpp)
+  add_dependencies(cxx_depends_all cxx_bigtable)
 endif()
 
 if(NOT TARGET cxx_cpr)
@@ -69,6 +71,7 @@ if(NOT TARGET cxx_cpr)
     -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DUSE_SYSTEM_CURL=ON ../cxx_cpr
     BUILD_COMMAND make -j
     )
+  add_dependencies(cxx_depends_all cxx_cpr)
 endif()
 
 if(NOT TARGET cxx_date)
@@ -81,6 +84,7 @@ if(NOT TARGET cxx_date)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_date
     BUILD_COMMAND make -j8
     )
+  add_dependencies(cxx_depends_all cxx_date)
 endif()
 
 if(NOT TARGET cxx_fmt)
@@ -93,6 +97,7 @@ if(NOT TARGET cxx_fmt)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DFMT_DOC=OFF -DFMT_TEST=OFF -DFMT_FUZZ=OFF ../cxx_fmt
     BUILD_COMMAND make -j8
     )
+  add_dependencies(cxx_depends_all cxx_fmt)
 endif()
 
 if(NOT TARGET cxx_googletest)
@@ -105,6 +110,7 @@ if(NOT TARGET cxx_googletest)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS="-Wno-deprecated-copy" ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_googletest
     BUILD_COMMAND make -j8
     )
+  add_dependencies(cxx_depends_all cxx_googletest)
 endif()
 
 if(NOT TARGET cxx_json)
@@ -117,6 +123,7 @@ if(NOT TARGET cxx_json)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DJSON_BuildTests=OFF -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_json
     BUILD_COMMAND make -j8
     )
+  add_dependencies(cxx_depends_all cxx_json)
 endif()
 
 if(NOT TARGET cxx_inja)
@@ -130,6 +137,7 @@ if(NOT TARGET cxx_inja)
     BUILD_COMMAND make -j8
     )
   add_dependencies(cxx_inja cxx_json)
+  add_dependencies(cxx_depends_all cxx_inja)
 endif()
 
 if(NOT TARGET cxx_httpserver)
@@ -166,6 +174,7 @@ if(NOT TARGET cxx_httpserver)
     )
   
   add_dependencies(cxx_httpserver cxx_libmicrohttpd)
+  add_dependencies(cxx_depends_all cxx_httpserver)
 endif()
 
 if(NOT TARGET cxx_xml)
@@ -178,6 +187,7 @@ if(NOT TARGET cxx_xml)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_xml
     BUILD_COMMAND make -j8
     )
+  add_dependencies(cxx_depends_all cxx_xml)
 endif()
 
 if(NOT TARGET cxx_xtensor)
@@ -212,6 +222,7 @@ if(NOT TARGET cxx_xtensor)
     )
   
   add_dependencies(cxx_xtensor cxx_xtl cxx_xsimd)
+  add_dependencies(cxx_depends_all cxx_xtensor)
 endif()
 
 if(NOT TARGET cxx_zstd)
@@ -224,4 +235,5 @@ if(NOT TARGET cxx_zstd)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_zstd/build/cmake
     BUILD_COMMAND make -j8
     )
+  add_dependencies(cxx_depends_all cxx_zstd)
 endif()
