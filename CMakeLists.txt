@@ -4,6 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_depends)
   # Directories
   #
+  set(DEPENDS_TARGET_DIR ${CMAKE_BINARY_DIR} CACHE BOOL "Target build directory")
   option(DEPENDS_TARGET_DIR "Target build directory" ${CMAKE_BINARY_DIR})
   
   set(DEPENDS_PARENT_DIR ${PROJECT_SOURCE_DIR} CACHE INTERNAL "")
@@ -176,6 +177,20 @@ if(NOT TARGET cxx_httpserver)
   add_dependencies(cxx_httpserver cxx_libmicrohttpd)
   add_dependencies(cxx_depends_all cxx_httpserver)
 endif()
+
+if(NOT TARGET cxx_ranges)
+  ExternalProject_Add(cxx_ranges
+    PREFIX ${DEPENDS_BUILD_DIR}/ranges
+    GIT_REPOSITORY git@github.com:melton1968/range-v3.git
+    GIT_TAG tags/0.10.0
+    GIT_SHALLOW TRUE
+    EXCLUDE_FROM_ALL TRUE
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release -DRANGE_V3_DOCS=OFF -DRANGE_V3_TESTS=OFF -DRANGE_V3_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_ranges
+    BUILD_COMMAND make -j8
+    )
+  add_dependencies(cxx_depends_all cxx_ranges)
+endif()
+
 
 if(NOT TARGET cxx_xml)
   ExternalProject_Add(cxx_xml
