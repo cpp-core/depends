@@ -29,7 +29,7 @@ include(ExternalProject)
 
 if(NOT TARGET cxx_bigtable)
   ExternalProject_Add(google_cloud_cpp_depend
-    PREFIX google_cloud_cpp_depend
+    PREFIX ${DEPENDS_BUILD_DIR}/google_cloud_cpp_depend
     GIT_REPOSITORY git@github.com:googleapis/google-cloud-cpp.git
     GIT_TAG e98225f15cbef73a66cd199d6fe778f1abbff5ad
     PATCH_COMMAND git apply ${DEPENDS_PARENT_DIR}/patches/google-cloud-cpp-depend.patch
@@ -42,7 +42,7 @@ if(NOT TARGET cxx_bigtable)
     )
 
   ExternalProject_Add(google_cloud_cpp
-    PREFIX google_cloud_cpp
+    PREFIX ${DEPENDS_BUILD_DIR}/google_cloud_cpp
     GIT_REPOSITORY git@github.com:googleapis/google-cloud-cpp.git
     GIT_TAG e98225f15cbef73a66cd199d6fe778f1abbff5ad
     EXCLUDE_FROM_ALL TRUE
@@ -63,7 +63,7 @@ endif()
 
 if(NOT TARGET cxx_cpr)
   ExternalProject_Add(cxx_cpr
-    PREFIX cpr
+    PREFIX ${DEPENDS_BUILD_DIR}/cpr
     GIT_REPOSITORY git@github.com:melton1968/cpr
     GIT_TAG 744bdddf7eaa1007e7ebac42667d286fb141be1d
     GIT_SHALLOW TRUE
@@ -143,26 +143,27 @@ endif()
 
 if(NOT TARGET cxx_httpserver)
   ExternalProject_Add(cxx_libmicrohttpd
-    PREFIX libmicrohttpd
+    PREFIX ${DEPENDS_BUILD_DIR}/libmicrohttpd
     GIT_REPOSITORY git@github.com:melton1968/libmicrohttpd
     GIT_TAG master
     GIT_SHALLOW TRUE
     PATCH_COMMAND git apply ${DEPENDS_PARENT_DIR}/patches/libmicrohttpd.patch
     BUILD_IN_SOURCE TRUE
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND autoreconf -fi && ./configure CC=${CC} CXX=${CXX} --disable-https --prefix=${DEPENDS_INSTALL_DIR}
+    CONFIGURE_COMMAND autoreconf -fi && ./configure CC=${CC} CXX=${CXX} --enable-https --with-gnutls=/opt/local --prefix=${DEPENDS_INSTALL_DIR}
     BUILD_COMMAND make -j8
     INSTALL_COMMAND make install
     )
-  
+
+  set(HTTP_CXXFLAGS "-I${DEPENDS_INSTALL_DIR}/include -I/opt/local/include")
   ExternalProject_Add(cxx_httpserver
-    PREFIX libhttpserver
+    PREFIX ${DEPENDS_BUILD_DIR}/libhttpserver
     GIT_REPOSITORY git@github.com:melton1968/libhttpserver
     GIT_TAG master
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND LDFLAGS=-L${DEPENDS_INSTALL_DIR}/lib CXXFLAGS=-I${DEPENDS_INSTALL_DIR}/include
-    <SOURCE_DIR>/configure CC=${CC} CXX=${CXX} --prefix=${DEPENDS_INSTALL_DIR}
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure LDFLAGS=-L${DEPENDS_INSTALL_DIR}/lib
+    CXXFLAGS=${HTTP_CXXFLAGS} CC=${CC} CXX=${CXX} --prefix=${DEPENDS_INSTALL_DIR}
     BUILD_COMMAND make -j
     INSTALL_COMMAND make install
     )
