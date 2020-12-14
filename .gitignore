@@ -35,4 +35,5 @@
 *.app
 
 # build directory
-build
+build/
+.ccls-cache
