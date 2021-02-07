@@ -116,33 +116,6 @@ if(NOT TARGET cxx_googletest)
   add_dependencies(cxx_depends_all cxx_googletest)
 endif()
 
-if(NOT TARGET cxx_json)
-  ExternalProject_Add(cxx_json
-    PREFIX ${DEPENDS_BUILD_DIR}/nlohmann_json
-    GIT_REPOSITORY git@github.com:melton1968/json.git
-    GIT_TAG tags/v3.7.0
-    GIT_SHALLOW TRUE
-    EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DJSON_BuildTests=OFF -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_json
-    BUILD_COMMAND make -j8
-    )
-  add_dependencies(cxx_depends_all cxx_json)
-endif()
-
-if(NOT TARGET cxx_inja)
-  ExternalProject_Add(cxx_inja
-    PREFIX ${DEPENDS_BUILD_DIR}/inja
-    GIT_REPOSITORY git@github.com:melton1968/inja.git
-    GIT_TAG 8e6a8428fa0d628bc58b939204ec7019e5ad1bd3
-    GIT_SHALLOW TRUE
-    EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DINJA_USE_EMBEDDED_JSON=OFF -DBUILD_TESTING=OFF -DBUILD_BENCHMARK=OFF ../cxx_inja
-    BUILD_COMMAND make -j8
-    )
-  add_dependencies(cxx_inja cxx_json)
-  add_dependencies(cxx_depends_all cxx_inja)
-endif()
-
 if(NOT TARGET cxx_httpserver)
   ExternalProject_Add(cxx_libmicrohttpd
     PREFIX ${DEPENDS_BUILD_DIR}/libmicrohttpd
@@ -181,32 +154,32 @@ if(NOT TARGET cxx_httpserver)
   #add_dependencies(cxx_depends_all cxx_httpserver)
 endif()
 
-if(NOT TARGET cxx_cppzmq)
-  set(LIBZMQ_CXXFLAGS "-I${DEPENDS_INSTALL_DIR}/include -I/opt/local/include")
-  ExternalProject_Add(cxx_libzmq
-    PREFIX ${DEPENDS_BUILD_DIR}/libzmq
-    GIT_REPOSITORY git@github.com:melton1968/libzmq.git
-    GIT_TAG 5888b2e319fb7afe20f920e93928a7e96a5a2f5c
+if(NOT TARGET cxx_inja)
+  ExternalProject_Add(cxx_inja
+    PREFIX ${DEPENDS_BUILD_DIR}/inja
+    GIT_REPOSITORY git@github.com:melton1968/inja.git
+    GIT_TAG 8e6a8428fa0d628bc58b939204ec7019e5ad1bd3
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DWITH_TLS=OFF ../cxx_libzmq
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DINJA_USE_EMBEDDED_JSON=OFF -DBUILD_TESTING=OFF -DBUILD_BENCHMARK=OFF ../cxx_inja
     BUILD_COMMAND make -j8
     )
-  
-  ExternalProject_Add(cxx_cppzmq
-    PREFIX ${DEPENDS_BUILD_DIR}/cppzmq
-    GIT_REPOSITORY git@github.com:melton1968/cppzmq.git
-    GIT_TAG c6ddc504d16a05f428a248784107eddd33ae5e14
-    GIT_SHALLOW TRUE
-    EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_cppzmq
-    BUILD_COMMAND make -j8
-    )
-  
-  add_dependencies(cxx_cppzmq cxx_libzmq)
-  add_dependencies(cxx_depends_all cxx_cppzmq)
+  add_dependencies(cxx_inja cxx_json)
+  add_dependencies(cxx_depends_all cxx_inja)
 endif()
 
+if(NOT TARGET cxx_json)
+  ExternalProject_Add(cxx_json
+    PREFIX ${DEPENDS_BUILD_DIR}/nlohmann_json
+    GIT_REPOSITORY git@github.com:melton1968/json.git
+    GIT_TAG tags/v3.7.0
+    GIT_SHALLOW TRUE
+    EXCLUDE_FROM_ALL TRUE
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DJSON_BuildTests=OFF -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_json
+    BUILD_COMMAND make -j8
+    )
+  add_dependencies(cxx_depends_all cxx_json)
+endif()
 
 if(NOT TARGET cxx_ranges)
   ExternalProject_Add(cxx_ranges
@@ -216,6 +189,20 @@ if(NOT TARGET cxx_ranges)
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release -DRANGE_V3_DOCS=OFF -DRANGE_V3_TESTS=OFF -DRANGE_V3_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_ranges
+    BUILD_COMMAND make -j8
+    )
+  add_dependencies(cxx_depends_all cxx_ranges)
+endif()
+
+if(NOT TARGET cxx_termox)
+  ExternalProject_Add(cxx_termox
+    PREFIX ${DEPENDS_BUILD_DIR}/termox
+    GIT_REPOSITORY git@github.com:melton1968/termox.git
+    GIT_TAG 0678be6a6f6c3d4cabfe777be35cbff0d0ca81b3
+    GIT_SHALLOW TRUE
+    EXCLUDE_FROM_ALL TRUE
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
+    -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_termox
     BUILD_COMMAND make -j8
     )
   add_dependencies(cxx_depends_all cxx_ranges)
@@ -268,6 +255,32 @@ if(NOT TARGET cxx_xtensor)
   
   add_dependencies(cxx_xtensor cxx_xtl cxx_xsimd)
   add_dependencies(cxx_depends_all cxx_xtensor)
+endif()
+
+if(NOT TARGET cxx_cppzmq)
+  set(LIBZMQ_CXXFLAGS "-I${DEPENDS_INSTALL_DIR}/include -I/opt/local/include")
+  ExternalProject_Add(cxx_libzmq
+    PREFIX ${DEPENDS_BUILD_DIR}/libzmq
+    GIT_REPOSITORY git@github.com:melton1968/libzmq.git
+    GIT_TAG 5888b2e319fb7afe20f920e93928a7e96a5a2f5c
+    GIT_SHALLOW TRUE
+    EXCLUDE_FROM_ALL TRUE
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} -DWITH_TLS=OFF ../cxx_libzmq
+    BUILD_COMMAND make -j8
+    )
+  
+  ExternalProject_Add(cxx_cppzmq
+    PREFIX ${DEPENDS_BUILD_DIR}/cppzmq
+    GIT_REPOSITORY git@github.com:melton1968/cppzmq.git
+    GIT_TAG c6ddc504d16a05f428a248784107eddd33ae5e14
+    GIT_SHALLOW TRUE
+    EXCLUDE_FROM_ALL TRUE
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_cppzmq
+    BUILD_COMMAND make -j8
+    )
+  
+  add_dependencies(cxx_cppzmq cxx_libzmq)
+  add_dependencies(cxx_depends_all cxx_cppzmq)
 endif()
 
 if(NOT TARGET cxx_zstd)
