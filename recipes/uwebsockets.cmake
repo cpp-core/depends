@@ -11,7 +11,7 @@ if(NOT TARGET cxx_uwebsockets)
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
-    INSTALL_COMMAND prefix=${DEPENDS_INSTALL_DIR} make
+    INSTALL_COMMAND prefix=${DEPENDS_INSTALL_DIR} WITH_OPENSSL=1 LDFLAGS=-L/opt/local/lib CFLAGS=-I/opt/local/include make
     )
   add_dependencies(cxx_depends_all cxx_uwebsockets)
 endif()
