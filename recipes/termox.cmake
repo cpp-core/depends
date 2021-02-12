@@ -9,7 +9,7 @@ if(NOT TARGET cxx_termox)
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
     -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_termox
-    BUILD_COMMAND make -j8
+    BUILD_COMMAND CC=${CC} CXX=${CXX} make -j8
     )
-  add_dependencies(cxx_depends_all cxx_ranges)
+  add_dependencies(cxx_depends_all cxx_termox)
 endif()
