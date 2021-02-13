@@ -12,5 +12,4 @@ if(NOT TARGET cxx_zlib)
     -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_zlib
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_depends_all cxx_zlib)
 endif()
