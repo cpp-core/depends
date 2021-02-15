@@ -5,9 +5,11 @@ if(NOT TARGET cxx_spdlog)
   ExternalProject_Add(cxx_spdlog
     PREFIX ${DEPENDS_BUILD_DIR}/spdlog
     GIT_REPOSITORY git@github.com:melton1968/spdlog
+    GIT_TAG V1.x
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
+    -DSPDLOG_FMT_EXTERNAL=ON
     -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_spdlog
     BUILD_COMMAND make -j
     )
