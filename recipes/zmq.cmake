@@ -2,11 +2,10 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 
 if(NOT TARGET cxx_cppzmq)
-  set(LIBZMQ_CXXFLAGS "-I${DEPENDS_INSTALL_DIR}/include -I/opt/local/include")
+  set(LIBZMQ_CXXFLAGS)
   ExternalProject_Add(cxx_libzmq
     PREFIX ${DEPENDS_BUILD_DIR}/libzmq
     GIT_REPOSITORY git@github.com:melton1968/libzmq.git
-    #GIT_TAG origin/master
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
     -DBUILD_TESTS=OFF
@@ -19,7 +18,6 @@ if(NOT TARGET cxx_cppzmq)
   ExternalProject_Add(cxx_cppzmq
     PREFIX ${DEPENDS_BUILD_DIR}/cppzmq
     GIT_REPOSITORY git@github.com:melton1968/cppzmq.git
-    #GIT_TAG origin/master
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
     -DCPPZMQ_BUILD_TESTS=OFF
