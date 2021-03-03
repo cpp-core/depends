@@ -12,5 +12,6 @@ if(NOT TARGET cxx_spdlog)
     -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_spdlog
     BUILD_COMMAND make -j
     )
+  add_dependencies(cxx_spdlog cxx_fmt)
   add_dependencies(cxx_depends_all cxx_spdlog)
 endif()
