@@ -21,12 +21,13 @@ if(NOT TARGET cxx_depends)
   add_custom_target(cxx_depends_all)
 endif()
 
-# The collection of external packages
-#
 set(CC ${CMAKE_C_COMPILER})
 set(CXX ${CMAKE_CXX_COMPILER})
+set(CXXFLAGS -stdlib=libc++)
 include(ExternalProject)
 
+# The collection of external packages
+#
 include(recipes/bigtable.cmake)
 include(recipes/cpr.cmake)
 include(recipes/date.cmake)
