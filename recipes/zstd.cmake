@@ -11,5 +11,6 @@ if(NOT TARGET cxx_zstd)
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_zstd/build/cmake
     BUILD_COMMAND make -j8
     )
+  add_dependencies(cxx_zstd cxx_fmt)
   add_dependencies(cxx_depends_all cxx_zstd)
 endif()
