@@ -7,10 +7,11 @@ if(NOT TARGET cxx_spdlog)
     GIT_REPOSITORY git@github.com:melton1968/spdlog
     GIT_TAG v1.x
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
+    CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
     -DSPDLOG_FMT_EXTERNAL=ON
     -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_spdlog
     BUILD_COMMAND make -j
     )
+  add_dependencies(cxx_spdlog cxx_fmt)
   add_dependencies(cxx_depends_all cxx_spdlog)
 endif()

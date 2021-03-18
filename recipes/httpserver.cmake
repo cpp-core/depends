@@ -10,7 +10,8 @@ if(NOT TARGET cxx_httpserver)
     PATCH_COMMAND git apply ${DEPENDS_PARENT_DIR}/patches/libmicrohttpd.patch
     BUILD_IN_SOURCE TRUE
     EXCLUDE_FROM_ALL TRUE
-    CONFIGURE_COMMAND autoreconf -fi && ./configure CC=${CC} CXX=${CXX} --enable-https --with-gnutls=/opt/local --prefix=${DEPENDS_INSTALL_DIR}
+    CONFIGURE_COMMAND autoreconf -fi && ./configure CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS}
+    --enable-https --with-gnutls=/opt/local --prefix=${DEPENDS_INSTALL_DIR}
     BUILD_COMMAND make -j8
     INSTALL_COMMAND make install
     )
@@ -23,7 +24,7 @@ if(NOT TARGET cxx_httpserver)
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND <SOURCE_DIR>/configure LDFLAGS=-L${DEPENDS_INSTALL_DIR}/lib
-    CXXFLAGS=${HTTP_CXXFLAGS} CC=${CC} CXX=${CXX} --prefix=${DEPENDS_INSTALL_DIR}
+    CXXFLAGS="${CXXFLAGS} ${HTTP_CXXFLAGS}" CC=${CC} CXX=${CXX} --prefix=${DEPENDS_INSTALL_DIR}
     BUILD_COMMAND make -j
     INSTALL_COMMAND make install
     )
