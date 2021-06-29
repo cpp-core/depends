@@ -29,6 +29,7 @@ include(ExternalProject)
 # The collection of external packages
 #
 include(recipes/bigtable.cmake)
+include(recipes/bzip2.cmake)
 include(recipes/cpr.cmake)
 include(recipes/date.cmake)
 include(recipes/fmt.cmake)
