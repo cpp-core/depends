@@ -56,12 +56,9 @@ function(configure_tests_multidir SUBDIR TARGET LIBRARIES)
     target_include_directories(${TEST_NAME} PUBLIC ../include/core)
   endforeach(NAME)
 
-  if (TARGET check)
-    add_custom_target(check_${SUBDIR} COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS ${TEST_TARGETS})
-    add_dependencies(check check_${SUBDIR})
-  else()
+  add_custom_target(check_${SUBDIR} COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS ${TEST_TARGETS})
+  if (NOT TARGET check)
     add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS ${TEST_TARGETS})
   endif()
-    
 endfunction()
 
