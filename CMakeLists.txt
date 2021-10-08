@@ -30,6 +30,7 @@ include(ExternalProject)
 #
 include(recipes/bigtable.cmake)
 include(recipes/bzip2.cmake)
+include(recipes/cppflow.cmake)
 include(recipes/cpr.cmake)
 include(recipes/date.cmake)
 include(recipes/fmt.cmake)
