@@ -5,7 +5,7 @@ if(NOT TARGET cxx_xtensor)
   ExternalProject_Add(cxx_xsimd
     PREFIX ${DEPENDS_BUILD_DIR}/xsimd
     GIT_REPOSITORY git@github.com:melton1968/xsimd.git
-    GIT_TAG 0c8e9e7b67369003ba291a3df8060d605ae3bd4f
+    GIT_TAG 7.6.0
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
@@ -16,7 +16,7 @@ if(NOT TARGET cxx_xtensor)
   ExternalProject_Add(cxx_xtl
     PREFIX ${DEPENDS_BUILD_DIR}/xtl
     GIT_REPOSITORY git@github.com:melton1968/xtl.git
-    GIT_TAG 4d1dfc6ef97467e645e055233af7183bd3100436
+    GIT_TAG 0.7.2
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
@@ -27,7 +27,7 @@ if(NOT TARGET cxx_xtensor)
   ExternalProject_Add(cxx_xtensor
     PREFIX ${DEPENDS_BUILD_DIR}/xtensor
     GIT_REPOSITORY git@github.com:melton1968/xtensor.git
-    GIT_TAG e25080b80f6f3d8fbf138d8989ba4f28d0bdb8cc
+    GIT_TAG 0.23.10
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
