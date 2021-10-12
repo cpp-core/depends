@@ -27,7 +27,7 @@ if(NOT TARGET cxx_xtensor)
   ExternalProject_Add(cxx_xtensor
     PREFIX ${DEPENDS_BUILD_DIR}/xtensor
     GIT_REPOSITORY git@github.com:melton1968/xtensor.git
-    GIT_TAG 0.23.10
+    GIT_TAG clang11-workaround
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
