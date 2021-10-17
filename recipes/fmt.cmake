@@ -5,7 +5,7 @@ if(NOT TARGET cxx_fmt)
   ExternalProject_Add(cxx_fmt
     PREFIX ${DEPENDS_BUILD_DIR}/fmt
     GIT_REPOSITORY git@github.com:melton1968/fmt.git
-    GIT_TAG 7.1.3
+    GIT_TAG 8.0.1
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=-stdlib=libc++ ${CMAKE_COMMAND}
