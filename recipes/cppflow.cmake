@@ -17,6 +17,7 @@ if(NOT TARGET cxx_cppflow)
     DOWNLOAD_NO_EXTRACT TRUE
     DOWNLOAD_NO_PROGRESS TRUE
     URL ${TF_URL}
+    EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND gunzip -c ${TF_FILE} | tar -C ${DEPENDS_INSTALL_DIR} -xvf -
@@ -32,6 +33,6 @@ if(NOT TARGET cxx_cppflow)
     INSTALL_COMMAND cp -rp ${DEPENDS_BUILD_DIR}/cppflow/src/cxx_cppflow/include/cppflow ${DEPENDS_INSTALL_DIR}/include/
     )
   
-  add_dependencies(cxx_cppflow cxx_tensorflow_c_api)
+#  add_dependencies(cxx_cppflow cxx_tensorflow_c_api)
 #  add_dependencies(cxx_depends_all cxx_cppflow)
 endif()
