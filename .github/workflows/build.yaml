@@ -14,14 +14,12 @@ jobs:
       
     - name: Checkout repo
       uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.REPO_ACCESS }}
-        submodules: recursive
+
     - name: Build
       run: |
         export CC=clang-11
         export CXX=clang++-11
         mkdir -p build && pushd build
         cmake ..
-        make cxx_depends_all
+        VERBOSE=1 make cxx_depends_all
         popd
