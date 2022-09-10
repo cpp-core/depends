@@ -9,7 +9,8 @@ if(NOT TARGET cxx_cppflow)
     set(TF_NAME libtensorflow-gpu-linux-x86_64-2.6.0.tar.gz)
   endif()
   set(TF_URL https://github.com/melton1968/tensorflow_c_api/releases/download/v2.6.0/${TF_NAME})
-  set(TF_FILE ${DEPENDS_BUILD_DIR}/tensorflow_c_api/src/${TF_NAME})
+  #set(TF_FILE ${DEPENDS_BUILD_DIR}/tensorflow_c_api/src/${TF_NAME})
+  set(TF_FILE https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-darwin-x86_64-2.9.1.tar.gz)
 
   ExternalProject_Add(cxx_tensorflow_c_api
     PREFIX ${DEPENDS_BUILD_DIR}/tensorflow_c_api
