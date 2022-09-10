@@ -14,5 +14,5 @@ if(NOT TARGET cxx_bzip2)
     INSTALL_COMMAND make install PREFIX=${DEPENDS_INSTALL_DIR}
     )
 
-  add_dependencies(cxx_depends_all cxx_bzip2)
+#  add_dependencies(cxx_depends_all cxx_bzip2)
 endif()
