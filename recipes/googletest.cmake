@@ -12,6 +12,10 @@ if(NOT TARGET cxx_googletest)
     -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_googletest
     BUILD_COMMAND make -j8
     )
+  add_custom_target(cxx_googletest_install_cmake)
+  add_custom_command(TARGET cxx_googletest_install_cmake POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy "${DEPENDS_SOURCE_DIR}/googletest.cmake"
+    "${CMAKE_INSTALL_PREFIX}/share/cmake/googletest/googletest.cmake")
   add_dependencies(cxx_depends_all cxx_googletest)
 endif()
 
