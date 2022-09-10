@@ -1,3 +1,5 @@
+[![Build](https://github.com/melton1968/cxx-depends/actions/workflows/build.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build.yaml)
+
 # cxx-depends: Simple C++ CMake Dependency Management
 
 ## TLDR;
