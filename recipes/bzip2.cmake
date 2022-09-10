@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_bzip2)
   ExternalProject_Add(cxx_bzip2
     PREFIX ${DEPENDS_BUILD_DIR}/bzip2
-    GIT_REPOSITORY https://github.com/melton1968/bzip2
+    GIT_REPOSITORY git@github.com:melton1968/bzip2
     GIT_TAG master
     GIT_SHALLOW TRUE
     BUILD_IN_SOURCE TRUE

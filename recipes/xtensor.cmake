@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_xtensor)
   ExternalProject_Add(cxx_xsimd
     PREFIX ${DEPENDS_BUILD_DIR}/xsimd
-    GIT_REPOSITORY https://github.com/melton1968/xsimd.git
+    GIT_REPOSITORY git@github.com:melton1968/xsimd.git
     GIT_TAG 7.6.0
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
@@ -15,7 +15,7 @@ if(NOT TARGET cxx_xtensor)
   
   ExternalProject_Add(cxx_xtl
     PREFIX ${DEPENDS_BUILD_DIR}/xtl
-    GIT_REPOSITORY https://github.com/melton1968/xtl.git
+    GIT_REPOSITORY git@github.com:melton1968/xtl.git
     GIT_TAG 0.7.2
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
@@ -26,7 +26,7 @@ if(NOT TARGET cxx_xtensor)
   
   ExternalProject_Add(cxx_xtensor
     PREFIX ${DEPENDS_BUILD_DIR}/xtensor
-    GIT_REPOSITORY https://github.com/melton1968/xtensor.git
+    GIT_REPOSITORY git@github.com:melton1968/xtensor.git
     GIT_TAG clang11-workaround
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE

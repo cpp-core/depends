@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_xml)
   ExternalProject_Add(cxx_xml
     PREFIX ${DEPENDS_BUILD_DIR}/pugixml
-    GIT_REPOSITORY https://github.com/melton1968/pugixml.git
+    GIT_REPOSITORY git@github.com:melton1968/pugixml.git
     GIT_TAG tags/v1.10
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE

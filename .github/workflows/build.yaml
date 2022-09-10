@@ -11,9 +11,15 @@ jobs:
     steps:
     - name: Requirements
       run: sudo apt-get install -y clang-11 libc++-11-dev libc++abi-11-dev libsodium-dev libcurl4-openssl-dev
-      
+
+    - name: SSH Agent
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        
     - name: Checkout repo
       uses: actions/checkout@v3
+      
 
     - name: Build
       run: |
@@ -21,5 +27,5 @@ jobs:
         export CXX=clang++-11
         mkdir -p build && pushd build
         cmake ..
-        VERBOSE=1 make cxx_depends_all
+        make cxx_depends_all
         popd

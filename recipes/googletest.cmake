@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_googletest)
   ExternalProject_Add(cxx_googletest
     PREFIX ${DEPENDS_BUILD_DIR}/googletest
-    GIT_REPOSITORY https://github.com/melton1968/googletest.git
+    GIT_REPOSITORY git@github.com:melton1968/googletest.git
     GIT_TAG ec44c6c1675c25b9827aacd08c02433cccde7780
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE

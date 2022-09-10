@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_termox)
   ExternalProject_Add(cxx_termox
     PREFIX ${DEPENDS_BUILD_DIR}/termox
-    GIT_REPOSITORY https://github.com/melton1968/termox.git
+    GIT_REPOSITORY git@github.com:melton1968/termox.git
     GIT_TAG origin/main
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}

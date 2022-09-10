@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_fmt)
   ExternalProject_Add(cxx_fmt
     PREFIX ${DEPENDS_BUILD_DIR}/fmt
-    GIT_REPOSITORY https://github.com/melton1968/fmt
+    GIT_REPOSITORY git@github.com:melton1968/fmt
     GIT_TAG 7.1.3
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
