@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_httpserver)
   ExternalProject_Add(cxx_libmicrohttpd
     PREFIX ${DEPENDS_BUILD_DIR}/libmicrohttpd
-    GIT_REPOSITORY git@github.com:melton1968/libmicrohttpd
+    GIT_REPOSITORY https://github.com/melton1968/libmicrohttpd
     GIT_TAG master
     GIT_SHALLOW TRUE
     PATCH_COMMAND git apply ${DEPENDS_PARENT_DIR}/patches/libmicrohttpd.patch
@@ -19,7 +19,7 @@ if(NOT TARGET cxx_httpserver)
   set(HTTP_CXXFLAGS "-I${DEPENDS_INSTALL_DIR}/include -I/opt/local/include")
   ExternalProject_Add(cxx_httpserver
     PREFIX ${DEPENDS_BUILD_DIR}/libhttpserver
-    GIT_REPOSITORY git@github.com:melton1968/libhttpserver
+    GIT_REPOSITORY https://github.com/melton1968/libhttpserver
     GIT_TAG master
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE

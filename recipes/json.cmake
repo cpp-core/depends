@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_json)
   ExternalProject_Add(cxx_json
     PREFIX ${DEPENDS_BUILD_DIR}/nlohmann_json
-    GIT_REPOSITORY git@github.com:melton1968/json.git
+    GIT_REPOSITORY https://github.com/melton1968/json.git
     GIT_TAG tags/v3.9.1
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE

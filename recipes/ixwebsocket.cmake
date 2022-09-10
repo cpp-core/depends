@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_ixwebsocket)
   ExternalProject_Add(cxx_ixwebsocket
     PREFIX ${DEPENDS_BUILD_DIR}/ixwebsocket
-    GIT_REPOSITORY git@github.com:melton1968/ixwebsocket.git
+    GIT_REPOSITORY https://github.com/melton1968/ixwebsocket.git
     GIT_TAG f6e34e4b34232bdfeebfe013aabd16f90f6d153d
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE

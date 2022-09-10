@@ -5,7 +5,7 @@ if(NOT TARGET cxx_cppzmq)
   set(LIBZMQ_CXXFLAGS)
   ExternalProject_Add(cxx_libzmq
     PREFIX ${DEPENDS_BUILD_DIR}/libzmq
-    GIT_REPOSITORY git@github.com:melton1968/libzmq.git
+    GIT_REPOSITORY https://github.com/melton1968/libzmq.git
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
     -DBUILD_TESTS=OFF
@@ -17,7 +17,7 @@ if(NOT TARGET cxx_cppzmq)
   
   ExternalProject_Add(cxx_cppzmq
     PREFIX ${DEPENDS_BUILD_DIR}/cppzmq
-    GIT_REPOSITORY git@github.com:melton1968/cppzmq.git
+    GIT_REPOSITORY https://github.com/melton1968/cppzmq.git
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
     -DCPPZMQ_BUILD_TESTS=OFF

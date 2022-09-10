@@ -24,7 +24,7 @@ if(NOT TARGET cxx_cppflow)
   
   ExternalProject_Add(cxx_cppflow
     PREFIX ${DEPENDS_BUILD_DIR}/cppflow
-    GIT_REPOSITORY git@github.com:melton1968/cppflow
+    GIT_REPOSITORY https://github.com/melton1968/cppflow
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND ""

@@ -4,7 +4,7 @@ project(cxx-depends VERSION 0.1 LANGUAGES C CXX)
 if(NOT TARGET cxx_zstd)
   ExternalProject_Add(cxx_zstd
     PREFIX ${DEPENDS_BUILD_DIR}/zstd
-    GIT_REPOSITORY git@github.com:melton1968/zstd.git
+    GIT_REPOSITORY https://github.com/melton1968/zstd.git
     GIT_TAG 1c700d1d50e3b50c533ac22a5279b1936d4d70ee
     GIT_SHALLOW TRUE
     EXCLUDE_FROM_ALL TRUE
