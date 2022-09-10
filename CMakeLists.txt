@@ -26,6 +26,7 @@ set(CXX ${CMAKE_CXX_COMPILER})
 set(CXXFLAGS -stdlib=libc++)
 include(ExternalProject)
 
+add_subdirectory(cxx_core_mp)
 add_subdirectory(cxx_core_pp)
 add_subdirectory(cxx_googletest)
 
