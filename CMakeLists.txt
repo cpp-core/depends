@@ -24,8 +24,11 @@ endif()
 set(CC ${CMAKE_C_COMPILER})
 set(CXX ${CMAKE_CXX_COMPILER})
 set(CXXFLAGS -stdlib=libc++)
+
+include(${CMAKE_SOURCE_DIR}/cmake/helpers.cmake)
 include(ExternalProject)
 
+add_subdirectory(cxx_bzip2)
 add_subdirectory(cxx_core_mp)
 add_subdirectory(cxx_core_pp)
 add_subdirectory(cxx_googletest)

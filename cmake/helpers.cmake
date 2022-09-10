@@ -1,5 +1,36 @@
 cmake_minimum_required (VERSION 3.12 FATAL_ERROR)
 
+function(install_config TARGET)
+  install(TARGETS ${TARGET}
+    EXPORT ${PROJECT_NAME}_Targets
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+  set(CONFIG_VERSION_NAME "${PROJECT_NAME}ConfigVersion.cmake")
+  set(CONFIG_NAME "${PROJECT_NAME}Config.cmake")
+  set(CONFIG_FILE_IN "${PROJECT_SOURCE_DIR}/cmake/${CONFIG_NAME}.in")
+  set(CONFIG_FILE "${PROJECT_BINARY_DIR}/${CONFIG_NAME}")
+  
+  include(CMakePackageConfigHelpers)
+  write_basic_package_version_file(${CONFIG_VERSION_NAME}
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion)
+  
+  configure_package_config_file(${CONFIG_FILE_IN} ${CONFIG_FILE}
+    INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+  
+  install(EXPORT ${PROJECT_NAME}_Targets
+    FILE ${PROJECT_NAME}Targets.cmake
+    NAMESPACE ${PROJECT_NAME}::
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+
+  install(FILES
+    "${CONFIG_FILE}"
+    "${PROJECT_BINARY_DIR}/${CONFIG_VERSION_NAME}"
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+endfunction()
+
 function(configure_tests SUBDIR TARGET LIBRARIES)
   foreach(NAME ${ARGN})
     get_filename_component(DIRNAME ${NAME} DIRECTORY)

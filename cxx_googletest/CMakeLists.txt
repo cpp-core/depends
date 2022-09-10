@@ -24,9 +24,13 @@ ExternalProject_Add(cxx_googletest_external_project
   )
 add_dependencies(cxx_googletest cxx_googletest_external_project)
 
+# Installation
+#
 # Describe the location of the libraries and headers to used for
 # client configuration.
 #
+include(GNUInstallDirs)
+
 set(GTEST_LIB ${CMAKE_INSTALL_PREFIX}/lib/libgtest.a)
 set(GMOCK_LIB ${CMAKE_INSTALL_PREFIX}/lib/libgmock.a)
 set(GTEST_INC ${CMAKE_INSTALL_PREFIX}/include)
@@ -35,39 +39,5 @@ add_library(googletest INTERFACE)
 target_link_libraries(googletest INTERFACE ${GTEST_LIB} ${GMOCK_LIB})
 target_include_directories(googletest INTERFACE ${GTEST_INC})
 
-# Installation
-#
-include(GNUInstallDirs)
+install_config(googletest)
 
-install(TARGETS googletest
-  EXPORT ${PROJECT_NAME}_Targets
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-set(CONFIG_VERSION_NAME "${PROJECT_NAME}ConfigVersion.cmake")
-set(CONFIG_NAME "${PROJECT_NAME}Config.cmake")
-set(CONFIG_FILE_IN "${PROJECT_SOURCE_DIR}/cmake/${CONFIG_NAME}.in")
-set(CONFIG_FILE "${PROJECT_BINARY_DIR}/${CONFIG_NAME}")
-
-message("-- cxx-core-mp: CONFIG_VERSION_NAME ${CONFIG_VERSION_NAME}")
-message("-- cxx-core-mp: CONFIG_NAME ${CONFIG_NAME}")
-message("-- cxx-core-mp: CONFIG_FILE ${CONFIG_FILE}")
-
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file(${CONFIG_VERSION_NAME}
-  VERSION ${PROJECT_VERSION}
-  COMPATIBILITY SameMajorVersion)
-
-configure_package_config_file(${CONFIG_FILE_IN} ${CONFIG_FILE}
-  INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
-
-install(EXPORT ${PROJECT_NAME}_Targets
-        FILE ${PROJECT_NAME}Targets.cmake
-        NAMESPACE ${PROJECT_NAME}::
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
-
-install(FILES
-  "${CONFIG_FILE}"
-  "${PROJECT_BINARY_DIR}/${CONFIG_VERSION_NAME}"
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
