@@ -7,7 +7,7 @@ if(NOT TARGET cxx_httpserver)
     GIT_REPOSITORY https://github.com/melton1968/libmicrohttpd
     GIT_TAG master
     GIT_SHALLOW TRUE
-    PATCH_COMMAND git apply ${DEPENDS_PARENT_DIR}/patches/libmicrohttpd.patch
+    PATCH_COMMAND git apply ${DEPENDS_PARENT_DIR}/recipes/libmicrohttpd.patch
     BUILD_IN_SOURCE TRUE
     EXCLUDE_FROM_ALL TRUE
     CONFIGURE_COMMAND autoreconf -fi && ./configure CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS}
