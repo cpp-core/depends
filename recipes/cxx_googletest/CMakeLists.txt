@@ -25,8 +25,6 @@ ExternalProject_Add(cxx_googletest
 
 # Config Install
 #
-include(GNUInstallDirs)
-
 set(GTEST_LIB ${CMAKE_INSTALL_PREFIX}/lib/libgtest.a)
 set(GMOCK_LIB ${CMAKE_INSTALL_PREFIX}/lib/libgmock.a)
 set(GTEST_INC ${CMAKE_INSTALL_PREFIX}/include)

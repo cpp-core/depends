@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 3.12 FATAL_ERROR)
 
 function(install_config TARGET)
+  include(GNUInstallDirs)
+  
   if(${ARGC} GREATER_EQUAL 2)
     set(NAME ${ARGV1})
   else()
