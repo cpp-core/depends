@@ -1,17 +1,22 @@
 cmake_minimum_required (VERSION 3.12 FATAL_ERROR)
 
 function(install_config TARGET)
+  if(${ARGC} GREATER_EQUAL 2)
+    set(NAME ${ARGV1})
+  else()
+    set(NAME ${TARGET})
+  endif()
   set(FLAVOR ${TARGET}-component)
   
   install(TARGETS ${TARGET}
-    EXPORT ${PROJECT_NAME}_Targets
+    EXPORT ${NAME}_Targets
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
     COMPONENT ${FLAVOR})
 
-  set(CONFIG_VERSION_NAME "${PROJECT_NAME}ConfigVersion.cmake")
-  set(CONFIG_NAME "${PROJECT_NAME}Config.cmake")
+  set(CONFIG_VERSION_NAME "${NAME}ConfigVersion.cmake")
+  set(CONFIG_NAME "${NAME}Config.cmake")
   set(CONFIG_FILE_IN "${PROJECT_SOURCE_DIR}/cmake/${CONFIG_NAME}.in")
   set(CONFIG_FILE "${PROJECT_BINARY_DIR}/${CONFIG_NAME}")
   
@@ -21,18 +26,18 @@ function(install_config TARGET)
     COMPATIBILITY SameMajorVersion)
   
   configure_package_config_file(${CONFIG_FILE_IN} ${CONFIG_FILE}
-    INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+    INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${NAME}/cmake)
   
-  install(EXPORT ${PROJECT_NAME}_Targets
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake
-    NAMESPACE ${PROJECT_NAME}::
-    FILE ${PROJECT_NAME}Targets.cmake
+  install(EXPORT ${NAME}_Targets
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${NAME}/cmake
+    NAMESPACE ${NAME}::
+    FILE ${NAME}Targets.cmake
     COMPONENT ${FLAVOR})
 
   install(FILES
     "${CONFIG_FILE}"
     "${PROJECT_BINARY_DIR}/${CONFIG_VERSION_NAME}"
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${NAME}/cmake
     COMPONENT ${FLAVOR})
 
   add_custom_target(${TARGET}-install
