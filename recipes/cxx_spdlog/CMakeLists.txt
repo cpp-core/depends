@@ -20,4 +20,5 @@ ExternalProject_Add(spdlog
   BUILD_COMMAND make -j
   )
 
+add_dependencies(spdlog fmt)
 add_dependencies(cxx_depends_all spdlog)
