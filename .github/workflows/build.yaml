@@ -29,6 +29,6 @@ jobs:
         export CC=clang-11
         export CXX=clang++-11
         mkdir -p cxx-depends/build && pushd cxx-depends/build
-        cmake ..
+        cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt ..
         make cxx_depends_all
         popd
