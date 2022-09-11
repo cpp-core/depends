@@ -15,17 +15,20 @@ jobs:
     - name: SSH Agent
       uses: webfactory/ssh-agent@v0.5.4
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ secrets.CXX_DEPENDS }}
         
     - name: Checkout repo
       uses: actions/checkout@v3
+      with:
+        repository: melton1968/cxx-depends
+        ref: migrate
+        path: cxx-depends
       
-
     - name: Build
       run: |
         export CC=clang-11
         export CXX=clang++-11
-        mkdir -p build && pushd build
+        mkdir -p cxx-depends/build && pushd cxx-depends/build
         cmake ..
         make cxx_depends_all
         popd
