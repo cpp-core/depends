@@ -26,3 +26,5 @@ target_link_libraries(libbz2 INTERFACE ${CMAKE_INSTALL_PREFIX}/lib/libbz2.a)
 target_include_directories(libbz2 INTERFACE ${CMAKE_INSTALL_PREFIX}/include)
 
 install_config(libbz2)
+
+add_dependencies(cxx_depends_all cxx_bzip2)

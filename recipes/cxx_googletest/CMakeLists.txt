@@ -41,3 +41,4 @@ target_include_directories(googletest INTERFACE ${GTEST_INC})
 
 install_config(googletest)
 
+add_dependencies(cxx_depends_all cxx_googletest)

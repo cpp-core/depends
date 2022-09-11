@@ -23,3 +23,4 @@ ExternalProject_Add(cxx_core_mp
   )
 
 add_dependencies(cxx_core_mp cxx_core_pp)
+add_dependencies(cxx_depends_all cxx_core_mp)

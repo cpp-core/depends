@@ -17,12 +17,8 @@ ExternalProject_Add(cxx_date
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
   -DUSE_SYSTEM_TZ_DB=ON
   -DBUILD_TZ_LIB=ON
-  -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_date
+  -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} ../cxx_date
   BUILD_COMMAND make -j8
   )
 
-add_library(date INTERFACE)
-target_link_libraries(date INTERFACE ${CMAKE_INSTALL_PREFIX}/lib/libdate-tz.a)
-target_include_directories(date INTERFACE ${CMAKE_INSTALL_PREFIX}/include)
-
-install_config(date)
+add_dependencies(cxx_depends_all cxx_date)

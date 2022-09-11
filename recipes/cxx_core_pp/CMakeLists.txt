@@ -7,7 +7,7 @@ if(TARGET cxx_core_pp)
   return()
 endif()
 
-# Build and install cxx-core-pp
+# Build and install cxx_core_pp
 #
 ExternalProject_Add(cxx_core_pp
   PREFIX cxx_core_pp
@@ -21,3 +21,5 @@ ExternalProject_Add(cxx_core_pp
   ../cxx_core_pp
   BUILD_COMMAND make -j8
   )
+
+add_dependencies(cxx_depends_all cxx_core_pp)
