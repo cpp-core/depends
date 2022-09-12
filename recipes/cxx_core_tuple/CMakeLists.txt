@@ -28,10 +28,8 @@ ExternalProject_Add(cxx_core_tuple
   )
 
 if(${CORE_TUPLE_TEST})
-  add_custom_target(cxx_core_tuple_check
-    COMMAND make check
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/recipes/cxx_core_tuple/cxx_core_tuple/src/cxx_core_tuple-build)
-  add_dependencies(cxx_core_tuple_check cxx_core_tuple)
+  add_check_target(cxx_core_tuple)
+  add_dependencies(cxx_core_tuple_check googletest)
 endif()
 
 add_dependencies(cxx_core_tuple cxx_core_mp)
