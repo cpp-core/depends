@@ -2,9 +2,9 @@
 name: Build and Test cxx-core-pp
 
 on:
-  push:
-    branches:
-      - 'main'
+  # push:
+  #   branches:
+  #     - 'main'
       
   workflow_dispatch:
 
@@ -37,6 +37,6 @@ jobs:
         export CC=clang-11
         export CXX=clang++-11
         mkdir -p cxx-depends/build && pushd cxx-depends/build
-        cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt -DCORE_PP_TEST ..
+        cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt -DCORE_PP_TEST=ON ..
         make cxx_core_pp_test
         popd
