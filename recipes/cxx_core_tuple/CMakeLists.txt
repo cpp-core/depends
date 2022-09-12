@@ -20,6 +20,7 @@ ExternalProject_Add(cxx_core_tuple
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
+  STEP_TARGETS build
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
   -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
   -DCORE_TUPLE_TEST=${CORE_TUPLE_TEST} -DCORE_TUPLE_DOCS=${CORE_TUPLE_DOCS}
@@ -29,7 +30,7 @@ ExternalProject_Add(cxx_core_tuple
 
 if(${CORE_TUPLE_TEST})
   add_check_target(cxx_core_tuple)
-  add_dependencies(cxx_core_tuple googletest)
+  add_dependencies(cxx_core_tuple-build googletest)
 endif()
 
 add_dependencies(cxx_core_tuple cxx_core_mp)

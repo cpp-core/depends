@@ -19,6 +19,7 @@ ExternalProject_Add(cxx_core_fp
   GIT_REPOSITORY git@github.com:melton1968/cxx-core-fp
   GIT_TAG main
   GIT_SHALLOW TRUE
+  STEP_TARGETS build
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
   -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
@@ -29,7 +30,7 @@ ExternalProject_Add(cxx_core_fp
 
 if(${CORE_FP_TEST})
   add_check_target(cxx_core_fp)
-  add_dependencies(cxx_core_fp googletest)
+  add_dependencies(cxx_core_fp-build googletest)
 endif()
 
 add_dependencies(cxx_core_fp cxx_core_mp)

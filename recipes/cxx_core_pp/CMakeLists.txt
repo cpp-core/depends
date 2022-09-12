@@ -20,6 +20,7 @@ ExternalProject_Add(cxx_core_pp
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
+  STEP_TARGETS build
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
   -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
   -DCORE_PP_TEST=${CORE_PP_TEST} -DCORE_PP_DOCS=${CORE_PP_DOCS}
@@ -29,7 +30,7 @@ ExternalProject_Add(cxx_core_pp
 
 if(${CORE_PP_TEST})
   add_check_target(cxx_core_pp)
-  add_dependencies(cxx_core_pp googletest)
+  add_dependencies(cxx_core_pp-build googletest)
 endif()
 
 add_dependencies(cxx_depends_all cxx_core_pp)

@@ -38,5 +38,5 @@ jobs:
         export CXX=clang++-11
         mkdir -p cxx-depends/build && pushd cxx-depends/build
         cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt -DCORE_TUPLE_TEST=ON ..
-        make cxx_core_tuple_check
+        make cxx_core_tuple-check
         popd
