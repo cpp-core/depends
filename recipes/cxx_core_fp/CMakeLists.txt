@@ -33,5 +33,5 @@ if(${CORE_FP_TEST})
   add_dependencies(cxx_core_fp-build googletest)
 endif()
 
-add_dependencies(cxx_core_fp cxx_core_mp)
+add_dependencies(cxx_core_fp-build cxx_core_mp)
 add_dependencies(cxx_depends_all cxx_core_fp)

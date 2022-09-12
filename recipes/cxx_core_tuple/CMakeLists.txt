@@ -33,5 +33,5 @@ if(${CORE_TUPLE_TEST})
   add_dependencies(cxx_core_tuple-build googletest)
 endif()
 
-add_dependencies(cxx_core_tuple cxx_core_mp)
+add_dependencies(cxx_core_tuple-build cxx_core_mp)
 add_dependencies(cxx_depends_all cxx_core_tuple)
