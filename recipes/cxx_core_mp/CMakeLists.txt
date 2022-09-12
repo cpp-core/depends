@@ -7,7 +7,12 @@ if(TARGET cxx_core_mp)
   return()
 endif()
 
-# Build and install cxx-core-pp
+# Build Options
+#
+option(CORE_MP_TEST "Compile cxx_core_mp tests" ${CORE_TEST})
+option(CORE_MP_DOCS "Generate cxx_core_mp docs" ${CORE_DOCS})
+
+# Build and install cxx-core-mp
 #
 ExternalProject_Add(cxx_core_mp
   PREFIX cxx_core_mp
@@ -17,10 +22,14 @@ ExternalProject_Add(cxx_core_mp
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
   -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-  -DCORE_MP_TEST=OFF -DCORE_MP_DOCS=OFF
+  -DCORE_MP_TEST=${CORE_MP_TEST} -DCORE_MP_DOCS=${CORE_MP_DOCS}
   ../cxx_core_mp
   BUILD_COMMAND make -j8
   )
+
+if(${CORE_MP_TEST})
+  add_check_target(cxx_core_mp)
+endif()
 
 add_dependencies(cxx_core_mp cxx_core_pp)
 add_dependencies(cxx_depends_all cxx_core_mp)

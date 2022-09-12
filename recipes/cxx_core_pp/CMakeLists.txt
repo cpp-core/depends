@@ -7,6 +7,11 @@ if(TARGET cxx_core_pp)
   return()
 endif()
 
+# Build Options
+#
+option(CORE_PP_TEST "Compile cxx_core_pp tests" ${CORE_TEST})
+option(CORE_PP_DOCS "Generate cxx_core_pp docs" ${CORE_DOCS})
+
 # Build and install cxx_core_pp
 #
 ExternalProject_Add(cxx_core_pp
@@ -17,9 +22,13 @@ ExternalProject_Add(cxx_core_pp
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
   -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-  -DCORE_PP_TEST=OFF -DCORE_PP_DOCS=OFF
+  -DCORE_PP_TEST=${CORE_PP_TEST} -DCORE_PP_DOCS=${CORE_PP_DOCS}
   ../cxx_core_pp
   BUILD_COMMAND make -j8
   )
+
+if(${CORE_PP_TEST})
+  add_check_target(cxx_core_pp)
+endif()
 
 add_dependencies(cxx_depends_all cxx_core_pp)

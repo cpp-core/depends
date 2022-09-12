@@ -7,6 +7,11 @@ if(TARGET cxx_core_tuple)
   return()
 endif()
 
+# Build Options
+#
+option(CORE_TUPLE_TEST "Compile cxx_core_tuple tests" ${CORE_TEST})
+option(CORE_TUPLE_DOCS "Generate cxx_core_tuple docs" ${CORE_DOCS})
+
 # Build and install cxx-core-tuple
 #
 ExternalProject_Add(cxx_core_tuple
@@ -17,10 +22,17 @@ ExternalProject_Add(cxx_core_tuple
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} ${CMAKE_COMMAND}
   -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-  -DCORE_TUPLE_TEST=OFF -DCORE_TUPLE_DOCS=OFF
+  -DCORE_TUPLE_TEST=${CORE_TUPLE_TEST} -DCORE_TUPLE_DOCS=${CORE_TUPLE_DOCS}
   ../cxx_core_tuple
   BUILD_COMMAND make -j8
   )
+
+if(${CORE_TUPLE_TEST})
+  add_custom_target(cxx_core_tuple_check
+    COMMAND make check
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/recipes/cxx_core_tuple/cxx_core_tuple/src/cxx_core_tuple-build)
+  add_dependencies(cxx_core_tuple_check cxx_core_tuple)
+endif()
 
 add_dependencies(cxx_core_tuple cxx_core_mp)
 add_dependencies(cxx_depends_all cxx_core_tuple)

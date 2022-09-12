@@ -7,6 +7,14 @@ if(TARGET cxx_depends)
   return()
 endif()
 
+# Build Options
+#
+option(ALL_TEST "Compile the tests for all projects" OFF)
+option(CORE_TEST "Compile the tests for cxx_core* projects" ${ALL_TEST})
+
+option(ALL_DOCS "Generate the docs for all projects" OFF)
+option(CORE_DOCS "Generate the docs for cxx_core* projects" ${ALL_DOCS})
+
 add_custom_target(cxx_depends)
 add_custom_target(cxx_depends_all)
 
@@ -15,6 +23,7 @@ set(CXX ${CMAKE_CXX_COMPILER})
 set(CXXFLAGS -stdlib=libc++)
 
 include(${CMAKE_SOURCE_DIR}/cmake/helpers.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/add_check_target.cmake)
 include(ExternalProject)
 
 # The collection of external packages
