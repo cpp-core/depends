@@ -1,0 +1,42 @@
+
+name: Build and Test cxx-core-pp
+
+on:
+  # push:
+  #   branches:
+  #     - 'main'
+      
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Requirements
+      run: sudo apt-get install -y clang-11 libc++-11-dev libc++abi-11-dev libsodium-dev libcurl4-openssl-dev
+
+    - name: SSH Agent
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: |
+          ${{ secrets.CXX_DEPENDS }}
+          ${{ secrets.CXX_CORE_PP }}
+          ${{ secrets.CXX_CORE_MP }}
+          ${{ secrets.CXX_CORE_TUPLE }}
+        
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        repository: melton1968/cxx-depends
+        ref: main
+        path: cxx-depends
+      
+    - name: Build
+      run: |
+        export CC=clang-11
+        export CXX=clang++-11
+        mkdir -p cxx-depends/build && pushd cxx-depends/build
+        cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt -DCORE_MP_TEST=ON ..
+        make cxx_core_mp_check
+        popd
