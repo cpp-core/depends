@@ -29,6 +29,7 @@ include(ExternalProject)
 # The collection of external packages
 #
 add_subdirectory(recipes/cxx_bzip2)
+add_subdirectory(recipes/cxx_core_fp)
 add_subdirectory(recipes/cxx_core_mp)
 add_subdirectory(recipes/cxx_core_pp)
 add_subdirectory(recipes/cxx_core_tuple)
