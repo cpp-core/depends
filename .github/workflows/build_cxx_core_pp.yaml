@@ -1,5 +1,5 @@
 
-name: Build and Test cxx-core-pp
+name: cxx-core-pp
 
 on:
   # push:

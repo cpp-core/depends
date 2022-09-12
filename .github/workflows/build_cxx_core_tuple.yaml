@@ -1,5 +1,5 @@
 
-name: Build and Test cxx-core-tuple
+name: cxx-core-tuple
 
 on:
   # push:

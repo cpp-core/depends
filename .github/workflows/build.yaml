@@ -1,5 +1,5 @@
 
-name: Build cxx_depends_all
+name: cxx_depends_all
 
 on:
   # push:
