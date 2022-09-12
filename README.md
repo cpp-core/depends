@@ -2,6 +2,7 @@
 [![cxx-core-pp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_pp.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_pp.yaml)
 [![cxx-core-mp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_mp.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_mp.yaml)
 [![cxx-core-tuple](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_tuple.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_tuple.yaml)
+[![cxx-core-fp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_fp.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_fp.yaml)
 
 # Simple C++ CMake Dependency Management
 
