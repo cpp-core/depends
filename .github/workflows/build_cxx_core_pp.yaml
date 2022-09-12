@@ -1,5 +1,5 @@
 
-name: Build cxx_depends_all
+name: Build and Test cxx-core-pp
 
 on:
   push:
@@ -37,6 +37,6 @@ jobs:
         export CC=clang-11
         export CXX=clang++-11
         mkdir -p cxx-depends/build && pushd cxx-depends/build
-        cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt ..
-        make cxx_depends_all
+        cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt -DCORE_PP_TEST ..
+        make cxx_core_pp_test
         popd
