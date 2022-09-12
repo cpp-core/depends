@@ -1,5 +1,6 @@
 [![Build](https://github.com/melton1968/cxx-depends/actions/workflows/build.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build.yaml)
 [![Build and Test cxx-core-pp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_pp.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_pp.yaml)
+[![Build and Test cxx-core-mp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_mp.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_mp.yaml)
 
 # Simple C++ CMake Dependency Management
 
