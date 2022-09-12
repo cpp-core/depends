@@ -29,7 +29,7 @@ ExternalProject_Add(cxx_core_tuple
 
 if(${CORE_TUPLE_TEST})
   add_check_target(cxx_core_tuple)
-  add_dependencies(cxx_core_tuple_check googletest)
+  add_dependencies(cxx_core_tuple googletest)
 endif()
 
 add_dependencies(cxx_core_tuple cxx_core_mp)

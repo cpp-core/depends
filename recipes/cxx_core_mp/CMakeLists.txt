@@ -29,7 +29,7 @@ ExternalProject_Add(cxx_core_mp
 
 if(${CORE_MP_TEST})
   add_check_target(cxx_core_mp)
-  add_dependencies(cxx_core_mp_check googletest)
+  add_dependencies(cxx_core_mp googletest)
 endif()
 
 add_dependencies(cxx_core_mp cxx_core_pp)
