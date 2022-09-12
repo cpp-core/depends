@@ -38,5 +38,5 @@ jobs:
         export CXX=clang++-11
         mkdir -p cxx-depends/build && pushd cxx-depends/build
         cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt -DCORE_PP_TEST=ON ..
-        make cxx_core_pp_test
+        make cxx_core_pp_check
         popd
