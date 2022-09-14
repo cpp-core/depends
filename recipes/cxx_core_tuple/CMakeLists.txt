@@ -28,10 +28,10 @@ ExternalProject_Add(cxx_core_tuple
   BUILD_COMMAND make -j8
   )
 
-if(${CORE_TUPLE_TEST})
-  add_check_target(cxx_core_tuple)
-  add_dependencies(cxx_core_tuple-build googletest)
-endif()
-
-add_dependencies(cxx_core_tuple-build cxx_core_mp)
+add_intermediate_targets(cxx_core_tuple)
+add_dependencies(cxx_core_tuple-depends cxx_core_mp)
 add_dependencies(cxx_depends_all cxx_core_tuple)
+
+if(${CORE_TUPLE_TEST})
+  add_dependencies(cxx_core_tuple-depends googletest)
+endif()

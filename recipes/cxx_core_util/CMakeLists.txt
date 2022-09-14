@@ -28,10 +28,12 @@ ExternalProject_Add(cxx_core_util
   BUILD_COMMAND make -j8
   )
 
+add_intermediate_targets(cxx_core_util)
+add_dependencies(cxx_core_util-depends cxx_coro_stream fmt json)
+add_dependencies(cxx_depends_all cxx_core_util)
+
 if(${CORE_UTIL_TEST})
-  add_check_target(cxx_core_util)
-  add_dependencies(cxx_core_util-build googletest)
+  add_dependencies(cxx_core_util-depends googletest)
 endif()
 
-add_dependencies(cxx_core_util-build cxx_coro_stream fmt json)
-add_dependencies(cxx_depends_all cxx_core_util)
+

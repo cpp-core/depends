@@ -28,10 +28,12 @@ ExternalProject_Add(cxx_coro_stream
   BUILD_COMMAND make -j8
   )
 
+add_intermediate_targets(cxx_coro_stream)
+add_dependencies(cxx_coro_stream-depends cxx_core_tuple fmt)
+add_dependencies(cxx_depends_all cxx_coro_stream)
+
 if(${CORO_STREAM_TEST})
-  add_check_target(cxx_coro_stream)
-  add_dependencies(cxx_coro_stream-build googletest)
+  add_dependencies(cxx_coro_stream-depends googletest)
 endif()
 
-add_dependencies(cxx_coro_stream-build cxx_core_tuple fmt)
-add_dependencies(cxx_depends_all cxx_coro_stream)
+

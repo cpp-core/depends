@@ -28,10 +28,10 @@ ExternalProject_Add(cxx_core_mp
   BUILD_COMMAND make -j8
   )
 
-if(${CORE_MP_TEST})
-  add_check_target(cxx_core_mp)
-  add_dependencies(cxx_core_mp-build googletest)
-endif()
-
-add_dependencies(cxx_core_mp-build cxx_core_pp fmt)
+add_intermediate_targets(cxx_core_mp)
+add_dependencies(cxx_core_mp-depends cxx_core_pp fmt)
 add_dependencies(cxx_depends_all cxx_core_mp)
+
+if(${CORE_MP_TEST})
+  add_dependencies(cxx_core_mp-depends googletest)
+endif()

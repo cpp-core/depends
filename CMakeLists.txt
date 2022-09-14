@@ -24,6 +24,7 @@ set(CXXFLAGS -stdlib=libc++)
 
 include(${CMAKE_SOURCE_DIR}/cmake/helpers.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/add_check_target.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/add_intermediate_targets.cmake)
 include(ExternalProject)
 
 # The collection of external packages
@@ -32,6 +33,7 @@ add_subdirectory(recipes/cxx_bzip2)
 add_subdirectory(recipes/cxx_core_fp)
 add_subdirectory(recipes/cxx_core_mp)
 add_subdirectory(recipes/cxx_core_pp)
+add_subdirectory(recipes/cxx_core_string)
 add_subdirectory(recipes/cxx_core_tuple)
 add_subdirectory(recipes/cxx_core_util)
 add_subdirectory(recipes/cxx_coro_stream)

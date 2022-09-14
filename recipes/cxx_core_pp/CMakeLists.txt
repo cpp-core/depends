@@ -28,9 +28,9 @@ ExternalProject_Add(cxx_core_pp
   BUILD_COMMAND make -j8
   )
 
-if(${CORE_PP_TEST})
-  add_check_target(cxx_core_pp)
-  add_dependencies(cxx_core_pp-build googletest)
-endif()
-
+add_intermediate_targets(cxx_core_pp)
 add_dependencies(cxx_depends_all cxx_core_pp)
+
+if(${CORE_PP_TEST})
+  add_dependencies(cxx_core_pp-depends googletest)
+endif()
