@@ -6,9 +6,9 @@
 [![cxx-core-util](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_util.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_util.yaml)
 [![cxx-coro-stream](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_coro_stream.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_coro_stream.yaml)
 
-# Simple C++ Dependency Management
+# Simple C++ Package Management
 
-A simple CMake framework for managing c++ dependencies.
+A simple CMake framework for managing C++ packages
 
 ## At A Glance
 
