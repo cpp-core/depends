@@ -6,6 +6,7 @@
 [![cxx-core-tuple](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_tuple.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_tuple.yaml)
 [![cxx-core-util](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_util.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_util.yaml)
 [![cxx-coro-stream](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_coro_stream.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_coro_stream.yaml)
+[![cxx-ply](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_ply.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_ply.yaml)
 
 # Basic C++ Package Management
 
