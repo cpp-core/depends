@@ -1,5 +1,5 @@
 
-name: cxx-core-util
+name: cxx-core-string
 
 on:
   # push:
