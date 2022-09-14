@@ -1,5 +1,5 @@
 
-name: cxx-core-ply
+name: cxx-ply
 
 on:
   # push:
