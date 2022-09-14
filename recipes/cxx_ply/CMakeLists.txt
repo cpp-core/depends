@@ -29,7 +29,7 @@ ExternalProject_Add(cxx_ply
   )
 
 add_intermediate_targets(cxx_ply)
-add_dependencies(cxx_ply-depends cxx_core_mp cxx_core_string cxx_core_util json)
+add_dependencies(cxx_ply-depends cxx_core_mp cxx_core_string cxx_core_util inja json)
 add_dependencies(cxx_depends_all cxx_ply)
 
 if(${PLY_TEST})
