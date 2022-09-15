@@ -12,7 +12,7 @@ endif()
 ExternalProject_Add(fmt
   PREFIX cxx_fmt
   GIT_REPOSITORY git@github.com:melton1968/fmt
-  GIT_TAG 7.1.3
+  GIT_TAG 9.1.0
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=-stdlib=libc++ ${CMAKE_COMMAND}
