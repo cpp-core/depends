@@ -32,6 +32,6 @@ add_intermediate_targets(cxx_core_chrono)
 add_dependencies(cxx_core_chrono-depends cxx_coro_stream cxx_core_string cxx_core_util date fmt json)
 add_dependencies(cxx_depends_all cxx_core_chrono)
 
-if(${CORE_STRING_TEST})
+if(${CORE_CHRONO_TEST})
   add_dependencies(cxx_core_chrono-depends googletest)
 endif()
