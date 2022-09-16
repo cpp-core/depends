@@ -32,6 +32,6 @@ add_intermediate_targets(cxx_core_cc)
 add_dependencies(cxx_core_cc-depends cxx_coro_stream fmt json)
 add_dependencies(cxx_depends_all cxx_core_cc)
 
-if(${CORE_STRING_TEST})
+if(${CORE_CC_TEST})
   add_dependencies(cxx_core_cc-depends googletest)
 endif()
