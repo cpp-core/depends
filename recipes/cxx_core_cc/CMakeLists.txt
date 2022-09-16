@@ -29,7 +29,7 @@ ExternalProject_Add(cxx_core_cc
   )
 
 add_intermediate_targets(cxx_core_cc)
-add_dependencies(cxx_core_cc-depends cxx_coro_stream fmt json)
+add_dependencies(cxx_core_cc-depends cxx_coro_stream cxx_core_util fmt json)
 add_dependencies(cxx_depends_all cxx_core_cc)
 
 if(${CORE_CC_TEST})
