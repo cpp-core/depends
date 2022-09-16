@@ -20,10 +20,17 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.4
       with:
         ssh-private-key: |
-          ${{ secrets.CXX_DEPENDS }}
-          ${{ secrets.CXX_CORE_PP }}
+          ${{ secrets.CXX_CORE_CC }}
+          ${{ secrets.CXX_CORE_CHRONO }}
+          ${{ secrets.CXX_CORE_FP }}
           ${{ secrets.CXX_CORE_MP }}
+          ${{ secrets.CXX_CORE_PP }}
+          ${{ secrets.CXX_CORE_STRING }}
           ${{ secrets.CXX_CORE_TUPLE }}
+          ${{ secrets.CXX_CORE_UTIL }}
+          ${{ secrets.CXX_CORO_STREAM }}
+          ${{ secrets.CXX_DEPENDS }}
+          ${{ secrets.CXX_PLY }}
         
     - name: Checkout repo
       uses: actions/checkout@v3
