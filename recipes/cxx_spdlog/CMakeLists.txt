@@ -12,7 +12,7 @@ endif()
 ExternalProject_Add(spdlog
   PREFIX cxx_spdlog
   GIT_REPOSITORY git@github.com:melton1968/spdlog
-  GIT_TAG v1.8.2
+  GIT_TAG v1.10.0
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
   -DSPDLOG_FMT_EXTERNAL=ON
