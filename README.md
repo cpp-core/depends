@@ -1,4 +1,6 @@
 [![Build](https://github.com/melton1968/cxx-depends/actions/workflows/build.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build.yaml)
+[![cxx-core-fp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_cc.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_fcc.yaml)
+[![cxx-core-fp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_chrono.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_chrono.yaml)
 [![cxx-core-fp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_fp.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_fp.yaml)
 [![cxx-core-mp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_mp.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_mp.yaml)
 [![cxx-core-pp](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_pp.yaml/badge.svg)](https://github.com/melton1968/cxx-depends/actions/workflows/build_cxx_core_pp.yaml)
