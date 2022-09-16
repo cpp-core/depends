@@ -29,7 +29,7 @@ ExternalProject_Add(cxx_coro_strand
   )
 
 add_intermediate_targets(cxx_coro_strand)
-add_dependencies(cxx_coro_strand-depends cxx_core_mp cxx_core_tuple fmt)
+add_dependencies(cxx_coro_strand-depends cxx_core_chrono cxx_core_mp cxx_core_tuple fmt)
 add_dependencies(cxx_depends_all cxx_coro_strand)
 
 if(${CORO_STRAND_TEST})
