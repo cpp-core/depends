@@ -10,9 +10,9 @@ endif()
 # Build and install data
 #
 ExternalProject_Add(inja
-  PREFIX cxx_inja
-  GIT_REPOSITORY git@github.com:melton1968/inja.git
-  GIT_TAG 8e6a8428fa0d628bc58b939204ec7019e5ad1bd3
+  PREFIX inja
+  GIT_REPOSITORY https://github.com/cpp-core/inja.git
+  GIT_TAG v3.3.0
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
