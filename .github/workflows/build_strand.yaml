@@ -1,5 +1,5 @@
 
-name: stream
+name: strand
 
 on:
   # push:
@@ -28,6 +28,6 @@ jobs:
         export CC=clang-11
         export CXX=clang++-11
         mkdir -p depends/build && pushd depends/build
-        cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt -DSTREAM_TEST=ON ..
-        make stream-check
+        cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt -DSTRAND_TEST=ON ..
+        make strand-check
         popd
