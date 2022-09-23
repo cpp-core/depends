@@ -12,11 +12,11 @@ endif()
 option(MP_TEST "Compile mp tests" ${ALL_TEST})
 option(MP_DOCS "Generate mp docs" ${ALL_DOCS})
 
-# Build and install cxx-core-mp
+# Build and install mp
 #
 ExternalProject_Add(mp
   PREFIX mp
-  GIT_REPOSITORY git@github.com:cpp-core/mp
+  GIT_REPOSITORY https://github.com/cpp-core/mp
   GIT_TAG main
   GIT_SHALLOW TRUE
   STEP_TARGETS build

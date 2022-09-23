@@ -16,7 +16,7 @@ option(PP_DOCS "Generate pp docs" ${ALL_DOCS})
 #
 ExternalProject_Add(pp
   PREFIX pp
-  GIT_REPOSITORY git@github.com:cpp-core/pp
+  GIT_REPOSITORY https://github.com/cpp-core/pp
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

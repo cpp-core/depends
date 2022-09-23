@@ -11,7 +11,7 @@ endif()
 #
 ExternalProject_Add(fmt
   PREFIX cxx_fmt
-  GIT_REPOSITORY git@github.com:melton1968/fmt
+  GIT_REPOSITORY https://github.com/cpp-core/fmt
   GIT_TAG 9.1.0
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

@@ -9,7 +9,7 @@ endif()
 
 ExternalProject_Add(googletest
   PREFIX googletest
-  GIT_REPOSITORY https://github.com/cpp-core/googletest.git
+  GIT_REPOSITORY https://github.com/cpp-core/googletest
   GIT_TAG v1.12.0
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
