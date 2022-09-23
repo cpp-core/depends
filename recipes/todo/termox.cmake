@@ -11,5 +11,5 @@ if(NOT TARGET cxx_termox)
     -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_termox
     BUILD_COMMAND CC=${CC} CXX=${CXX} make -j8
     )
-  add_dependencies(cxx_depends_all cxx_termox)
+  add_dependencies(depends_all cxx_termox)
 endif()

@@ -14,5 +14,5 @@ if(NOT TARGET cxx_inja)
     BUILD_COMMAND make -j8
     )
   add_dependencies(cxx_inja cxx_json)
-  add_dependencies(cxx_depends_all cxx_inja)
+  add_dependencies(depends_all cxx_inja)
 endif()

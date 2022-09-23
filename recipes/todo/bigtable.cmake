@@ -32,6 +32,6 @@ if(NOT TARGET cxx_bigtable)
   # add_custom_target(cxx_bigtable)
   # add_dependencies(google_cloud_cpp google_cloud_cpp_depend)
   # add_dependencies(cxx_bigtable google_cloud_cpp)
-  # add_dependencies(cxx_depends_all cxx_bigtable)
+  # add_dependencies(depends_all cxx_bigtable)
 endif()
 

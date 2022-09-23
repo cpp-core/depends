@@ -13,5 +13,5 @@ if(NOT TARGET cxx_ixwebsocket)
     -DCMAKE_INSTALL_PREFIX=${DEPENDS_INSTALL_DIR} ../cxx_ixwebsocket
     BUILD_COMMAND make -j8
     )
-  add_dependencies(cxx_depends_all cxx_ixwebsocket)
+  add_dependencies(depends_all cxx_ixwebsocket)
 endif()

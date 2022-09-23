@@ -34,5 +34,5 @@ if(NOT TARGET cxx_cppflow)
     )
   
 #  add_dependencies(cxx_cppflow cxx_tensorflow_c_api)
-#  add_dependencies(cxx_depends_all cxx_cppflow)
+#  add_dependencies(depends_all cxx_cppflow)
 endif()

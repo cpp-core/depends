@@ -37,5 +37,5 @@ if(NOT TARGET cxx_httpserver)
     )
   
   add_dependencies(cxx_httpserver cxx_libmicrohttpd)
-  #add_dependencies(cxx_depends_all cxx_httpserver)
+  #add_dependencies(depends_all cxx_httpserver)
 endif()
