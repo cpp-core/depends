@@ -33,5 +33,5 @@ add_dependencies(fp-depends mp)
 add_dependencies(depends_all fp)
 
 if(${FP_TEST})
-  add_dependencies(fp-depends googletest)
+  add_dependencies(fp-depends stream googletest)
 endif()
