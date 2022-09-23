@@ -16,7 +16,7 @@ option(CHRONO_DOCS "Generate chrono docs" ${ALL_DOCS})
 #
 ExternalProject_Add(chrono
   PREFIX chrono
-  GIT_REPOSITORY git@github.com:cpp-core/chrono
+  GIT_REPOSITORY https://github.com/cpp-core/chrono
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

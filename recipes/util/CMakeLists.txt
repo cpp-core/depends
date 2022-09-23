@@ -16,7 +16,7 @@ option(UTIL_DOCS "Generate util docs" ${ALL_DOCS})
 #
 ExternalProject_Add(util
   PREFIX util
-  GIT_REPOSITORY git@github.com:cpp-core/util
+  GIT_REPOSITORY https://github.com/cpp-core/util
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

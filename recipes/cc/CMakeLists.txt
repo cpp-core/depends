@@ -16,7 +16,7 @@ option(CC_DOCS "Generate cc docs" ${ALL_DOCS})
 #
 ExternalProject_Add(cc
   PREFIX cc
-  GIT_REPOSITORY git@github.com:cpp-core/cc
+  GIT_REPOSITORY https://github.com/cpp-core/cc
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

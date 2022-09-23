@@ -16,7 +16,7 @@ option(FP_DOCS "Generate fp docs" ${ALL_DOCS})
 #
 ExternalProject_Add(fp
   PREFIX fp
-  GIT_REPOSITORY git@github.com:cpp-core/fp
+  GIT_REPOSITORY https://github.com/cpp-core/fp
   GIT_TAG main
   GIT_SHALLOW TRUE
   STEP_TARGETS build

@@ -16,7 +16,7 @@ option(CODEC_DOCS "Generate codec docs" ${ALL_DOCS})
 #
 ExternalProject_Add(codec
   PREFIX codec
-  GIT_REPOSITORY git@github.com:cpp-core/codec
+  GIT_REPOSITORY https://github.com/cpp-core/codec
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
