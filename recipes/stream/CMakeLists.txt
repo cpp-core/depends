@@ -16,7 +16,7 @@ option(CORO_STREAM_DOCS "Generate stream docs" ${ALL_DOCS})
 #
 ExternalProject_Add(stream
   PREFIX stream
-  GIT_REPOSITORY git@github.com:melton1968/cxx-coro-stream
+  GIT_REPOSITORY git@github.com:cpp-core/stream
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

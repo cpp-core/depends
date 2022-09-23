@@ -16,7 +16,7 @@ option(STRING_DOCS "Generate string docs" ${ALL_DOCS})
 #
 ExternalProject_Add(string
   PREFIX string
-  GIT_REPOSITORY git@github.com:melton1968/cxx-core-string
+  GIT_REPOSITORY git@github.com:cpp-core/string
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

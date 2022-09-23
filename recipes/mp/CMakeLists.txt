@@ -16,7 +16,7 @@ option(MP_DOCS "Generate mp docs" ${ALL_DOCS})
 #
 ExternalProject_Add(mp
   PREFIX mp
-  GIT_REPOSITORY git@github.com:melton1968/cxx-core-mp
+  GIT_REPOSITORY git@github.com:cpp-core/mp
   GIT_TAG main
   GIT_SHALLOW TRUE
   STEP_TARGETS build

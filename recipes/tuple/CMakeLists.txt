@@ -16,7 +16,7 @@ option(TUPLE_DOCS "Generate tuple docs" ${ALL_DOCS})
 #
 ExternalProject_Add(tuple
   PREFIX tuple
-  GIT_REPOSITORY git@github.com:melton1968/cxx-core-tuple
+  GIT_REPOSITORY git@github.com:cpp-core/tuple
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

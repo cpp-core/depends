@@ -16,7 +16,7 @@ option(CORO_STRAND_DOCS "Generate strand docs" ${ALL_DOCS})
 #
 ExternalProject_Add(strand
   PREFIX strand
-  GIT_REPOSITORY git@github.com:melton1968/cxx-coro-strand
+  GIT_REPOSITORY git@github.com:cpp-core/strand
   GIT_TAG main
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
