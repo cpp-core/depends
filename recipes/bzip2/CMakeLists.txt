@@ -14,8 +14,8 @@ add_custom_target(libbz2)
 # Build and install libbz2
 #
 ExternalProject_Add(bzip2
-  PREFIX cxx_bzip2
-  GIT_REPOSITORY git@github.com:melton1968/bzip2
+  PREFIX bzip2
+  GIT_REPOSITORY https://github.com/melton1968/bzip2
   GIT_TAG master
   GIT_SHALLOW TRUE
   BUILD_IN_SOURCE TRUE

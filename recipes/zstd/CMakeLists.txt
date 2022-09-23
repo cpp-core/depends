@@ -10,9 +10,9 @@ endif()
 # Build and install zstd
 #
 ExternalProject_Add(zstd
-  PREFIX cxx_zstd
-  GIT_REPOSITORY git@github.com:melton1968/zstd.git
-  GIT_TAG 1c700d1d50e3b50c533ac22a5279b1936d4d70ee
+  PREFIX zstd
+  GIT_REPOSITORY https://github.com/cpp-core/zstd.git
+  GIT_TAG v1.5.2
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
