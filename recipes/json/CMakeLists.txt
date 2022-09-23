@@ -11,7 +11,7 @@ endif()
 #
 ExternalProject_Add(json
   PREFIX cxx_json
-  GIT_REPOSITORY git@github.com:melton1968/json.git
+  GIT_REPOSITORY https://github.com/cpp-core/json.git
   GIT_TAG tags/v3.9.1
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE

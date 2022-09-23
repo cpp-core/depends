@@ -11,7 +11,7 @@ endif()
 #
 ExternalProject_Add(date
   PREFIX cxx_date
-  GIT_REPOSITORY git@github.com:melton1968/date
+  GIT_REPOSITORY https://github.com/cpp-core/date
   GIT_SHALLOW TRUE
   EXCLUDE_FROM_ALL TRUE
   CONFIGURE_COMMAND CC=${CC} CXX=${CXX} CXXFLAGS=${CXXFLAGS} ${CMAKE_COMMAND}
